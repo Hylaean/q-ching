@@ -1,0 +1,12 @@
+.footer {
+  position: fixed;
+  right: max(1.1rem, env(safe-area-inset-right));
+  bottom: max(0.9rem, env(safe-area-inset-bottom));
+  z-index: 20;
+  font-family: var(--sans);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  color: var(--paper-ghost);
+  pointer-events: none;
+  user-select: none;
+}

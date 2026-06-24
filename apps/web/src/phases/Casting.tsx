@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cast, type CastMethod, type QrngResult, type Reading } from '@q-ching/core';
 import { LineStack, type LineDatum } from '../components/LineStack';
+import { useI18n } from '../i18n';
 import styles from './Casting.module.css';
 
 interface CastingProps {
@@ -20,6 +21,7 @@ const LINE_STAGGER = 0.62; // seconds between line reveals
  * up so the READING phase can take over.
  */
 export function Casting({ method, userEntropy, qrng, reducedMotion, onComplete }: CastingProps) {
+  const { t } = useI18n();
   const [reading, setReading] = useState<Reading | null>(null);
   const [revealed, setRevealed] = useState(0); // how many lines have flourished
   const started = useRef(false);
@@ -69,7 +71,7 @@ export function Casting({ method, userEntropy, qrng, reducedMotion, onComplete }
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        {method === 'coin' ? 'Three coins fall' : 'The stalks divide'}
+        {method === 'coin' ? t('casting.coin') : t('casting.yarrow')}
       </motion.p>
 
       <div className={styles.flourishWrap}>
@@ -95,12 +97,12 @@ export function Casting({ method, userEntropy, qrng, reducedMotion, onComplete }
             reducedMotion={reducedMotion}
           />
         ) : (
-          <p className={styles.casting_note}>casting…</p>
+          <p className={styles.casting_note}>{t('casting.note')}</p>
         )}
       </div>
 
       <p className={styles.count}>
-        {reading ? `${Math.min(revealed, 6)} of 6 lines` : 'drawing from the well'}
+        {reading ? t('casting.count', { n: Math.min(revealed, 6) }) : t('casting.drawing')}
       </p>
     </div>
   );

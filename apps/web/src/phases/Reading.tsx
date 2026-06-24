@@ -3,6 +3,8 @@ import { motion, type MotionProps } from 'framer-motion';
 import type { Reading as ReadingType } from '@q-ching/core';
 import { HexagramGlyph } from '../components/HexagramGlyph';
 import { LineStack, bitsToLines } from '../components/LineStack';
+import { useI18n } from '../i18n';
+import { hexText } from '../i18n/hexText';
 import styles from './Reading.module.css';
 
 interface ReadingProps {
@@ -13,6 +15,8 @@ interface ReadingProps {
 }
 
 export function Reading({ reading, question, reducedMotion, onAgain }: ReadingProps) {
+  const { t, locale } = useI18n();
+
   // A scroll-triggered fade-in per section, or an immediate appearance when the
   // querent prefers reduced motion.
   const section = (delay: number): MotionProps =>
@@ -26,6 +30,8 @@ export function Reading({ reading, question, reducedMotion, onAgain }: ReadingPr
         };
 
   const { primary, transformed, changingPositions, lines, seed, method } = reading;
+  const primaryText = hexText(primary, locale);
+  const transformedText = transformed ? hexText(transformed, locale) : null;
   const [copied, setCopied] = useState(false);
   const copyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -67,18 +73,18 @@ export function Reading({ reading, question, reducedMotion, onAgain }: ReadingPr
           {question.trim() && <p className={styles.echo}>“{question.trim()}”</p>}
 
           <div className={styles.glyphRow}>
-            <HexagramGlyph symbol={primary.symbol} label={primary.name.english} />
+            <HexagramGlyph symbol={primary.symbol} label={primaryText.name} />
             <div className={styles.lineCol}>
               <LineStack lines={primaryLines} reducedMotion={reducedMotion} />
             </div>
           </div>
 
-          <p className={styles.number}>Hexagram {primary.number}</p>
+          <p className={styles.number}>{t('reading.hexagram', { n: primary.number })}</p>
           <h1 className={styles.hanzi}>{primary.name.chinese}</h1>
           <p className={styles.pinyin}>
-            {primary.name.pinyin} · <span className={styles.english}>{primary.name.english}</span>
+            {primary.name.pinyin} · <span className={styles.english}>{primaryText.name}</span>
           </p>
-          <p className={styles.gloss}>{primary.gloss}</p>
+          <p className={styles.gloss}>{primaryText.gloss}</p>
         </motion.header>
 
         <div className="rule">
@@ -87,25 +93,25 @@ export function Reading({ reading, question, reducedMotion, onAgain }: ReadingPr
 
         {/* ---- Judgment ----------------------------------------------------- */}
         <motion.section className={styles.passage} {...section(0.05)}>
-          <p className="label">The Judgment</p>
-          <p className={styles.prose}>{primary.judgment}</p>
+          <p className="label">{t('reading.judgment')}</p>
+          <p className={styles.prose}>{primaryText.judgment}</p>
         </motion.section>
 
         {/* ---- Image -------------------------------------------------------- */}
         <motion.section className={styles.passage} {...section(0.05)}>
-          <p className="label">The Image</p>
-          <p className={styles.prose}>{primary.image}</p>
+          <p className="label">{t('reading.image')}</p>
+          <p className={styles.prose}>{primaryText.image}</p>
         </motion.section>
 
         {/* ---- Changing lines ---------------------------------------------- */}
         {changingPositions.length > 0 && (
           <motion.section className={styles.changing} {...section(0.05)}>
-            <p className="label">Lines in Motion</p>
+            <p className="label">{t('reading.linesInMotion')}</p>
             <ul className={styles.changeList}>
               {changingPositions.map((pos) => (
                 <li key={pos} className={styles.changeItem}>
-                  <span className={styles.changeOrdinal}>{ordinal(pos)}</span>
-                  <p className={styles.prose}>{primary.lineTexts[pos - 1]}</p>
+                  <span className={styles.changeOrdinal}>{t('reading.line.' + pos)}</span>
+                  <p className={styles.prose}>{primaryText.lineTexts[pos - 1]}</p>
                 </li>
               ))}
             </ul>
@@ -113,14 +119,14 @@ export function Reading({ reading, question, reducedMotion, onAgain }: ReadingPr
         )}
 
         {/* ---- Transformed hexagram ---------------------------------------- */}
-        {transformed && (
+        {transformed && transformedText && (
           <motion.section className={styles.becoming} {...section(0.05)}>
             <div className="rule">
               <span className="rule__diamond" />
             </div>
-            <p className={styles.becomingLabel}>this is becoming…</p>
+            <p className={styles.becomingLabel}>{t('reading.becoming')}</p>
             <div className={styles.glyphRow}>
-              <HexagramGlyph symbol={transformed.symbol} size="medium" label={transformed.name.english} />
+              <HexagramGlyph symbol={transformed.symbol} size="medium" label={transformedText.name} />
               <div className={styles.lineCol}>
                 <LineStack
                   lines={bitsToLines(transformed.bits)}
@@ -128,40 +134,34 @@ export function Reading({ reading, question, reducedMotion, onAgain }: ReadingPr
                 />
               </div>
             </div>
-            <p className={styles.number}>Hexagram {transformed.number}</p>
+            <p className={styles.number}>{t('reading.hexagram', { n: transformed.number })}</p>
             <h2 className={styles.hanziMed}>{transformed.name.chinese}</h2>
             <p className={styles.pinyin}>
               {transformed.name.pinyin} ·{' '}
-              <span className={styles.english}>{transformed.name.english}</span>
+              <span className={styles.english}>{transformedText.name}</span>
             </p>
-            <p className={styles.gloss}>{transformed.gloss}</p>
+            <p className={styles.gloss}>{transformedText.gloss}</p>
           </motion.section>
         )}
 
         {/* ---- Seed --------------------------------------------------------- */}
         <motion.section className={styles.seedBlock} {...section(0.05)}>
           <p className={styles.seedNote}>
-            This cast was drawn by the {method} method. Its seed reproduces it exactly —
-            keep it to return to this same throw.
+            {t('reading.seedNote', { method: t('method.' + method + '.word') })}
           </p>
-          <button className={styles.seedButton} onClick={copySeed} title="Copy seed">
-            <span className={`mono ${styles.seedValue}`}>{seed}</span>
-            <span className={styles.copyTag}>{copied ? 'copied' : 'copy'}</span>
+          <button className={styles.seedButton} onClick={copySeed} title={t('reading.copy')}>
+            <span className={styles.seedValue}>{seed}</span>
+            <span className={styles.copyTag}>{copied ? t('reading.copied') : t('reading.copy')}</span>
           </button>
         </motion.section>
 
         {/* ---- Cast again --------------------------------------------------- */}
         <motion.div className={styles.again} {...section(0.05)}>
           <button className="affordance affordance--primary" onClick={onAgain}>
-            Cast again
+            {t('reading.castAgain')}
           </button>
         </motion.div>
       </div>
     </div>
   );
-}
-
-function ordinal(n: number): string {
-  const names = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth'];
-  return `${names[n - 1] ?? n} line`;
 }

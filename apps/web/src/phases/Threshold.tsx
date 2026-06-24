@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { BreathingCircle } from '../components/BreathingCircle';
+import { useI18n } from '../i18n';
 import styles from './Threshold.module.css';
 
 interface ThresholdProps {
@@ -16,6 +17,7 @@ const fade = {
 };
 
 export function Threshold({ onBegin }: ThresholdProps) {
+  const { t } = useI18n();
   return (
     <div className={`stage ${styles.threshold}`}>
       <motion.div variants={fade} custom={0} initial="hidden" animate="show">
@@ -33,12 +35,12 @@ export function Threshold({ onBegin }: ThresholdProps) {
         initial="hidden"
         animate="show"
       >
-        an oracle cast from quantum noise and the motion of your hand
+        {t('threshold.subtitle')}
       </motion.p>
 
       <motion.div variants={fade} custom={3} initial="hidden" animate="show">
         <button className="affordance affordance--primary" onClick={onBegin}>
-          Begin
+          {t('common.begin')}
         </button>
       </motion.div>
     </div>

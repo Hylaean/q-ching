@@ -3,7 +3,7 @@
  * forward; the only backward move is "cast again", which returns to QUESTION
  * so the gesture/entropy is re-gathered fresh for the next reading.
  */
-import type { CastMethod, Reading } from '@q-ching/core';
+import type { CastMethod, QrngSourceName, Reading } from '@q-ching/core';
 
 export type Phase = 'threshold' | 'question' | 'gathering' | 'casting' | 'reading';
 
@@ -11,6 +11,8 @@ export interface RitualState {
   phase: Phase;
   question: string;
   method: CastMethod;
+  /** Which random sources to draw from. 'csprng' is always folded in by the engine. */
+  sources: QrngSourceName[];
   reading: Reading | null;
 }
 
@@ -18,6 +20,7 @@ export type RitualAction =
   | { type: 'begin' }
   | { type: 'setQuestion'; question: string }
   | { type: 'setMethod'; method: CastMethod }
+  | { type: 'setSources'; sources: QrngSourceName[] }
   | { type: 'toGathering' }
   | { type: 'toCasting' }
   | { type: 'castComplete'; reading: Reading }
@@ -28,6 +31,7 @@ export const initialRitualState: RitualState = {
   phase: 'threshold',
   question: '',
   method: 'coin',
+  sources: ['nist', 'csprng'],
   reading: null,
 };
 
@@ -39,6 +43,8 @@ export function ritualReducer(state: RitualState, action: RitualAction): RitualS
       return { ...state, question: action.question };
     case 'setMethod':
       return { ...state, method: action.method };
+    case 'setSources':
+      return { ...state, sources: action.sources };
     case 'toGathering':
       return { ...state, phase: 'gathering' };
     case 'toCasting':

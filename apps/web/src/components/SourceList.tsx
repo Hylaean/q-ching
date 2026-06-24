@@ -1,14 +1,16 @@
 import { motion } from 'framer-motion';
 import type { QrngResult, QrngSourceName } from '@q-ching/core';
+import { useI18n } from '../i18n';
 import styles from './SourceList.module.css';
 
 export type SourceStatus = 'pending' | QrngResult;
 
-const SOURCE_META: Record<QrngSourceName, { title: string; blurb: string }> = {
-  nist: { title: 'NIST quantum beacon', blurb: 'the cosmic pulse at the moment you asked' },
-  anu: { title: 'ANU vacuum noise', blurb: 'fluctuations of empty space' },
-  'random.org': { title: 'atmospheric noise', blurb: 'static gathered from the sky' },
-  csprng: { title: 'local entropy', blurb: 'your device’s own randomness' },
+/** Base i18n key per source: `${base}.title` / `${base}.blurb`. */
+const SOURCE_KEY: Record<QrngSourceName, string> = {
+  nist: 'source.nist',
+  anu: 'source.anu',
+  'random.org': 'source.randomorg',
+  csprng: 'source.csprng',
 };
 
 interface SourceListProps {
@@ -25,10 +27,11 @@ interface SourceListProps {
  * succeeds, so a cast is never blocked.
  */
 export function SourceList({ order, statuses }: SourceListProps) {
+  const { t } = useI18n();
   return (
     <div className={styles.list}>
       {order.map((source) => {
-        const meta = SOURCE_META[source];
+        const base = SOURCE_KEY[source];
         const status = statuses[source] ?? 'pending';
         const pending = status === 'pending';
         const ok = !pending && status.ok;
@@ -48,13 +51,13 @@ export function SourceList({ order, statuses }: SourceListProps) {
               {pending ? <span className={styles.dot} /> : ok ? '✓' : '✗'}
             </span>
             <span className={styles.name}>
-              <strong>{meta.title}</strong>
+              <strong>{t(`${base}.title`)}</strong>
               {pending ? (
-                <span className={styles.detail}> — listening…</span>
+                <span className={styles.detail}> — {t('source.listening')}</span>
               ) : ok ? (
-                <span className={styles.detail}> — {meta.blurb}</span>
+                <span className={styles.detail}> — {t(`${base}.blurb`)}</span>
               ) : (
-                <span className={styles.detail}> — unreachable (folded around)</span>
+                <span className={styles.detail}> — {t('source.unreachable')}</span>
               )}
             </span>
           </motion.div>

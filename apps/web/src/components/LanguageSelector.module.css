@@ -1,0 +1,30 @@
+.wrap {
+  position: fixed;
+  top: max(1.1rem, env(safe-area-inset-top));
+  left: max(1.1rem, env(safe-area-inset-left));
+  z-index: 20;
+  display: flex;
+  gap: 0.15rem;
+  align-items: center;
+  font-family: var(--sans);
+}
+
+.btn {
+  background: transparent;
+  border: none;
+  padding: 0.3rem 0.45rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  color: var(--paper-ghost);
+  cursor: pointer;
+  transition: color 0.4s var(--ease-soft);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn:hover {
+  color: var(--paper-faint);
+}
+
+.btn.active {
+  color: var(--gold);
+}

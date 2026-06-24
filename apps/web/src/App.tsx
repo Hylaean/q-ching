@@ -17,6 +17,9 @@ import { Gathering } from './phases/Gathering';
 import { Casting } from './phases/Casting';
 import { Reading as ReadingPhase } from './phases/Reading';
 import { Journal } from './components/Journal';
+import { SmokeField } from './components/SmokeField';
+import { LanguageSelector } from './components/LanguageSelector';
+import { Footer } from './components/Footer';
 
 const phaseFade = {
   initial: { opacity: 0 },
@@ -113,8 +116,10 @@ export default function App() {
             question={state.question}
             method={state.method}
             gesture={gestureRef.current}
+            sources={state.sources}
             onQuestionChange={(q) => dispatch({ type: 'setQuestion', question: q })}
             onMethodChange={(m) => dispatch({ type: 'setMethod', method: m })}
+            onSourcesChange={(s) => dispatch({ type: 'setSources', sources: s })}
             onContinue={handleGather}
           />
         );
@@ -123,6 +128,7 @@ export default function App() {
           <Gathering
             gesture={gestureRef.current}
             reducedMotion={reducedMotion}
+            sources={state.sources}
             onCast={handleCast}
           />
         );
@@ -153,6 +159,14 @@ export default function App() {
   return (
     <>
       <div className="atmosphere" aria-hidden />
+      <SmokeField
+        reducedMotion={reducedMotion}
+        seed={state.reading?.seed}
+        emit={state.phase === 'gathering'}
+      />
+
+      <LanguageSelector />
+      <Footer />
 
       <Journal
         open={journalOpen}
