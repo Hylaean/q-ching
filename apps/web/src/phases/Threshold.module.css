@@ -1,0 +1,25 @@
+.threshold {
+  gap: clamp(1.6rem, 4vh, 2.8rem);
+}
+
+.title {
+  font-size: clamp(3.2rem, 12vw, 6.5rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: var(--paper);
+}
+
+.dash {
+  color: var(--cinnabar);
+  font-style: italic;
+  padding: 0 0.04em;
+}
+
+.subtitle {
+  font-style: italic;
+  font-size: clamp(1.05rem, 2.6vw, 1.4rem);
+  color: var(--paper-faint);
+  max-width: 26rem;
+  line-height: 1.5;
+}

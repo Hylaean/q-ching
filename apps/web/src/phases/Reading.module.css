@@ -1,0 +1,226 @@
+.reading {
+  position: relative;
+  z-index: 1;
+  height: 100svh;
+  width: 100%;
+}
+
+.inner {
+  max-width: 38rem;
+  margin: 0 auto;
+  padding: clamp(3rem, 9vh, 6rem) clamp(1.5rem, 6vw, 3rem);
+  padding-top: max(clamp(3rem, 9vh, 6rem), calc(env(safe-area-inset-top) + 2rem));
+  padding-bottom: max(6rem, calc(env(safe-area-inset-bottom) + 4rem));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(2.2rem, 6vh, 3.6rem);
+  text-align: center;
+}
+
+/* ---- crown ---------------------------------------------------------------- */
+
+.crown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.echo {
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--paper-faint);
+  max-width: 26rem;
+  margin-bottom: 1.4rem;
+  line-height: 1.5;
+}
+
+.glyphRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.4rem, 5vw, 3rem);
+  margin-bottom: 0.6rem;
+}
+
+.lineCol {
+  --stack-width: 8.5rem;
+  --line-height: 0.7rem;
+  --line-gap: 0.55rem;
+}
+
+.number {
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.hanzi {
+  font-family: var(--hanzi);
+  font-size: clamp(2.4rem, 9vw, 3.4rem);
+  font-weight: 600;
+  color: var(--paper);
+  line-height: 1.1;
+}
+
+.hanziMed {
+  font-family: var(--hanzi);
+  font-size: clamp(2rem, 7vw, 2.6rem);
+  font-weight: 600;
+  color: var(--paper);
+}
+
+.pinyin {
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--paper-dim);
+}
+.english {
+  font-style: normal;
+}
+
+.gloss {
+  font-size: 1.05rem;
+  color: var(--paper-faint);
+  max-width: 24rem;
+  line-height: 1.5;
+  margin-top: 0.2rem;
+}
+
+/* ---- passages ------------------------------------------------------------- */
+
+.passage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  max-width: var(--measure);
+}
+
+.prose {
+  font-size: clamp(1.15rem, 2.8vw, 1.4rem);
+  line-height: 1.7;
+  color: var(--paper);
+  text-wrap: pretty;
+}
+
+/* ---- changing lines ------------------------------------------------------- */
+
+.changing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.4rem;
+  max-width: var(--measure);
+}
+
+.changeList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+  width: 100%;
+}
+
+.changeItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  position: relative;
+  padding-top: 1.4rem;
+}
+.changeItem::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  background: var(--cinnabar);
+  box-shadow: 0 0 10px rgba(179, 71, 51, 0.6);
+}
+
+.changeOrdinal {
+  font-family: var(--sans);
+  font-size: 0.64rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cinnabar);
+}
+
+/* ---- becoming (transformed) ---------------------------------------------- */
+
+.becoming {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  width: 100%;
+}
+
+.becomingLabel {
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--gold);
+  margin: 1.2rem 0 1.6rem;
+}
+
+/* ---- seed ----------------------------------------------------------------- */
+
+.seedBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  max-width: 30rem;
+}
+
+.seedNote {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  color: var(--paper-faint);
+}
+
+.seedButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  max-width: 100%;
+  padding: 0.65rem 0.95rem;
+  border: 1px solid var(--paper-ghost);
+  border-radius: 8px;
+  background: rgba(26, 24, 21, 0.6);
+  transition: border-color 0.4s var(--ease-soft);
+}
+.seedButton:hover {
+  border-color: var(--gold-soft);
+}
+.seedButton .mono {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 16rem;
+}
+
+.copyTag {
+  flex: none;
+  font-family: var(--sans);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.again {
+  margin-top: 1rem;
+}

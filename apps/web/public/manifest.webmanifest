@@ -1,0 +1,26 @@
+{
+  "name": "q-ching",
+  "short_name": "q-ching",
+  "description": "An oracle cast from quantum noise and the motion of your hand.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#11100e",
+  "theme_color": "#11100e",
+  "categories": ["lifestyle", "utilities"],
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

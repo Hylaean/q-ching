@@ -1,0 +1,78 @@
+.list {
+  width: 100%;
+  max-width: 22rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  font-family: var(--sans);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.82rem;
+  color: var(--paper-faint);
+}
+
+.glyph {
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--paper-ghost);
+  font-size: 0.7rem;
+}
+
+.glyph.ok {
+  border-color: var(--gold-soft);
+  color: var(--gold);
+}
+.glyph.fail {
+  border-color: var(--cinnabar-soft);
+  color: var(--cinnabar);
+}
+.glyph.pending {
+  color: var(--paper-faint);
+}
+
+/* a quiet spinner dot for pending sources */
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--paper-faint);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .dot {
+    animation: blink 1.4s var(--ease-soft) infinite;
+  }
+}
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.name {
+  flex: 1;
+  text-align: left;
+  letter-spacing: 0.02em;
+}
+.name strong {
+  font-weight: 500;
+  color: var(--paper);
+}
+
+.detail {
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--paper-ghost);
+}

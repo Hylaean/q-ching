@@ -1,0 +1,87 @@
+.stack {
+  display: flex;
+  flex-direction: column-reverse; /* DOM order bottom->top; visual bottom at the bottom */
+  align-items: center;
+  gap: var(--line-gap, 0.85rem);
+  width: var(--stack-width, 13rem);
+}
+
+.line {
+  position: relative;
+  width: 100%;
+  height: var(--line-height, 1.05rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* solid yang bar */
+.yang {
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(180deg, var(--paper) 0%, var(--paper-dim) 100%);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
+}
+
+/* broken yin: two segments with a centered gap */
+.yin {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.yin span {
+  width: 42%;
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(180deg, var(--paper) 0%, var(--paper-dim) 100%);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
+}
+
+/* a changing line glows cinnabar and carries a pulsing dot at its right edge */
+.changing .yang,
+.changing .yin span {
+  background: linear-gradient(180deg, #d8745f 0%, var(--cinnabar) 100%);
+  box-shadow:
+    0 0 14px rgba(179, 71, 51, 0.45),
+    0 1px 0 rgba(0, 0, 0, 0.3);
+}
+
+.changeMark {
+  position: absolute;
+  right: calc(-0.5rem - var(--line-height, 1.05rem));
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--cinnabar);
+  box-shadow: 0 0 10px rgba(179, 71, 51, 0.7);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .changeMark {
+    animation: ring 2.4s var(--ease-soft) infinite;
+  }
+}
+
+@keyframes ring {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(179, 71, 51, 0.55);
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0 0 0 7px rgba(179, 71, 51, 0);
+    opacity: 0.7;
+  }
+}
+
+/* compact variant for the journal drawer */
+.compact {
+  --line-gap: 0.32rem;
+  --line-height: 0.4rem;
+  --stack-width: 3.2rem;
+}
+.compact .changeMark {
+  display: none;
+}

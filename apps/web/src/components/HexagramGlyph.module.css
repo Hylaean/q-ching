@@ -1,0 +1,14 @@
+.glyph {
+  font-family: var(--hanzi), serif;
+  line-height: 1;
+  color: var(--paper);
+  text-shadow: 0 0 38px rgba(184, 150, 104, 0.18);
+}
+
+.large {
+  font-size: clamp(5rem, 22vw, 9rem);
+}
+
+.medium {
+  font-size: clamp(3.5rem, 14vw, 5.5rem);
+}

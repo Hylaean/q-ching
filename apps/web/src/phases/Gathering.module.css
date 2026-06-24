@@ -1,0 +1,74 @@
+.gathering {
+  position: relative;
+  min-height: 100svh;
+  width: 100%;
+}
+
+.canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+.overlay {
+  position: relative;
+  z-index: 2;
+  gap: clamp(1.3rem, 3.2vh, 2rem);
+  max-width: 34rem;
+  /* let pointer events fall through to the canvas, except on interactive bits */
+  pointer-events: none;
+}
+
+.overlay :where(button, a, textarea) {
+  pointer-events: auto;
+}
+
+.instruction {
+  font-style: italic;
+  font-size: clamp(1.05rem, 2.6vw, 1.3rem);
+  line-height: 1.55;
+  color: var(--paper-faint);
+  max-width: 30rem;
+  text-shadow: 0 1px 18px rgba(17, 16, 14, 0.9);
+}
+
+.panel {
+  pointer-events: auto;
+  width: 100%;
+  max-width: 24rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  padding: 1.5rem 1.4rem;
+  border: 1px solid var(--paper-ghost);
+  border-radius: 14px;
+  background: rgba(17, 16, 14, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  align-items: center;
+}
+
+.sources {
+  width: 100%;
+}
+
+.motionNote {
+  font-family: var(--sans);
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+  color: var(--paper-ghost);
+}
+
+.castSlot {
+  min-height: 3.4rem;
+  display: grid;
+  place-items: center;
+}
+
+.waiting {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--paper-ghost);
+}

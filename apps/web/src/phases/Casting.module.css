@@ -1,0 +1,36 @@
+.casting {
+  gap: clamp(2rem, 6vh, 3.5rem);
+}
+
+.flourishWrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 14rem;
+}
+
+.flourish {
+  position: absolute;
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+  border: 1px solid var(--gold-soft);
+  pointer-events: none;
+}
+
+.casting_note {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--paper-ghost);
+}
+
+.count {
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--paper-faint);
+  font-variant-numeric: tabular-nums;
+}

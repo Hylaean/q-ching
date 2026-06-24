@@ -1,0 +1,22 @@
+{
+  "name": "q-ching",
+  "version": "0.1.0",
+  "private": true,
+  "description": "An I-Ching oracle cast from quantum randomness and the motion of your own hand.",
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build:core": "npm run build --workspace @q-ching/core",
+    "test:core": "npm run test --workspace @q-ching/core",
+    "dev:web": "npm run dev --workspace @q-ching/web",
+    "build:web": "npm run build --workspace @q-ching/web",
+    "tui": "npm run start --workspace @q-ching/tui",
+    "build": "npm run build:core && npm run build:web && npm run build --workspace @q-ching/tui"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

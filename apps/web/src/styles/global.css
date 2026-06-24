@@ -1,0 +1,272 @@
+/* ============================================================================
+   q-ching — global stylesheet
+   Ink-wash / rice-paper. Deep ink, bone paper, a single cinnabar accent,
+   muted gold. Serif for oracle text; sans only for small UI affordances.
+   ========================================================================== */
+
+:root {
+  /* palette */
+  --ink: #11100e;
+  --ink-2: #1a1815;
+  --ink-3: #232019;
+  --paper: #efe9dd;
+  --paper-dim: #cfc8b8;
+  --paper-faint: rgba(239, 233, 221, 0.55);
+  --paper-ghost: rgba(239, 233, 221, 0.16);
+  --cinnabar: #b34733;
+  --cinnabar-soft: rgba(179, 71, 51, 0.5);
+  --gold: #b89668;
+  --gold-soft: rgba(184, 150, 104, 0.42);
+
+  /* type */
+  --serif: 'Cormorant Garamond', 'Noto Serif SC', Georgia, 'Times New Roman', serif;
+  --hanzi: 'Noto Serif SC', 'Cormorant Garamond', serif;
+  --sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --mono: ui-monospace, 'SF Mono', 'JetBrains Mono', 'Menlo', monospace;
+
+  /* motion */
+  --ease-slow: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* spacing rhythm */
+  --measure: 34rem;
+
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--ink);
+  color: var(--paper);
+  font-family: var(--serif);
+  font-size: clamp(16px, 1.4vw, 19px);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow: hidden; /* the app manages its own scroll regions per phase */
+  overscroll-behavior: none;
+}
+
+/* ---- atmosphere: rice-paper grain + ink vignette --------------------------- */
+/* A layered radial wash gives the deep ink a sense of pooled pigment, and a
+   tileable SVG fractal-noise overlay reads as the tooth of mulberry paper. */
+
+.atmosphere {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.atmosphere::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 90% at 50% -10%, rgba(184, 150, 104, 0.08), transparent 55%),
+    radial-gradient(140% 120% at 50% 120%, rgba(179, 71, 51, 0.07), transparent 60%),
+    radial-gradient(100% 100% at 50% 40%, var(--ink-2), var(--ink) 75%);
+}
+
+.atmosphere::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  mix-blend-mode: screen;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- typography primitives ------------------------------------------------- */
+
+h1,
+h2,
+h3 {
+  font-weight: 500;
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  font-family: var(--sans);
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+textarea {
+  font-family: inherit;
+  color: inherit;
+}
+
+::selection {
+  background: var(--cinnabar);
+  color: var(--paper);
+}
+
+/* shared "stamp" affordance — a quiet bordered pill, sans-serif */
+.affordance {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--paper-dim);
+  border: 1px solid var(--paper-ghost);
+  border-radius: 999px;
+  padding: 0.85em 2em;
+  background: transparent;
+  transition:
+    color 0.5s var(--ease-soft),
+    border-color 0.5s var(--ease-soft),
+    background-color 0.5s var(--ease-soft),
+    letter-spacing 0.5s var(--ease-soft);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.affordance:hover,
+.affordance:focus-visible {
+  color: var(--paper);
+  border-color: var(--gold-soft);
+  background-color: rgba(184, 150, 104, 0.06);
+  letter-spacing: 0.24em;
+  outline: none;
+}
+
+.affordance--primary {
+  border-color: var(--cinnabar-soft);
+  color: var(--paper);
+}
+
+.affordance--primary:hover,
+.affordance--primary:focus-visible {
+  border-color: var(--cinnabar);
+  background-color: rgba(179, 71, 51, 0.1);
+}
+
+.affordance:disabled {
+  opacity: 0.32;
+  cursor: not-allowed;
+  letter-spacing: 0.18em;
+}
+
+.label {
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+}
+
+/* a fine hairline divider with a centered diamond */
+.rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--paper-ghost);
+  width: 100%;
+  max-width: 18rem;
+}
+.rule::before,
+.rule::after {
+  content: '';
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(90deg, transparent, var(--paper-ghost), transparent);
+}
+.rule__diamond {
+  width: 5px;
+  height: 5px;
+  transform: rotate(45deg);
+  background: var(--gold-soft);
+}
+
+/* generic stage: a centered, padded, vertically-centered phase canvas */
+.stage {
+  position: relative;
+  z-index: 1;
+  min-height: 100svh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.5rem, 5vw, 4rem);
+  padding-top: max(clamp(1.5rem, 5vw, 4rem), env(safe-area-inset-top));
+  padding-bottom: max(clamp(1.5rem, 5vw, 4rem), env(safe-area-inset-bottom));
+  text-align: center;
+}
+
+/* small monospace whisper (the seed) */
+.mono {
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+  color: var(--paper-faint);
+}
+
+a {
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid var(--gold-soft);
+}
+
+/* accessible focus ring */
+:focus-visible {
+  outline: 1px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* hide scrollbars but keep scroll where a phase needs it */
+.scroll-region {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--paper-ghost) transparent;
+}
+.scroll-region::-webkit-scrollbar {
+  width: 6px;
+}
+.scroll-region::-webkit-scrollbar-thumb {
+  background: var(--paper-ghost);
+  border-radius: 3px;
+}
+
+/* respect reduced motion: kill non-essential animation/transition globally */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

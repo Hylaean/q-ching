@@ -1,0 +1,167 @@
+/* the toggle tab — a quiet vertical stamp pinned to the edge */
+.toggle {
+  position: fixed;
+  top: max(1.1rem, env(safe-area-inset-top));
+  right: max(1.1rem, env(safe-area-inset-right));
+  z-index: 20;
+  font-family: var(--sans);
+  font-size: 0.66rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--paper-faint);
+  border: 1px solid var(--paper-ghost);
+  border-radius: 999px;
+  padding: 0.55em 1.1em;
+  background: rgba(17, 16, 14, 0.5);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: color 0.4s var(--ease-soft), border-color 0.4s var(--ease-soft);
+}
+.toggle:hover {
+  color: var(--paper);
+  border-color: var(--gold-soft);
+}
+
+.scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: rgba(10, 9, 8, 0.55);
+  backdrop-filter: blur(2px);
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 31;
+  width: min(26rem, 92vw);
+  background: var(--ink-2);
+  border-left: 1px solid var(--paper-ghost);
+  box-shadow: -30px 0 60px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  padding-top: env(safe-area-inset-top);
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 1.6rem 1.6rem 1.1rem;
+  border-bottom: 1px solid var(--paper-ghost);
+}
+
+.head h2 {
+  font-size: 1.6rem;
+  font-style: italic;
+  color: var(--paper);
+}
+
+.close {
+  font-family: var(--sans);
+  font-size: 0.66rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--paper-faint);
+}
+.close:hover {
+  color: var(--paper);
+}
+
+.list {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0.6rem 1rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.empty {
+  padding: 3rem 1.6rem;
+  text-align: center;
+  font-style: italic;
+  color: var(--paper-faint);
+  line-height: 1.6;
+}
+
+.entry {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  text-align: left;
+  padding: 0.95rem 0.7rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: background-color 0.35s var(--ease-soft), border-color 0.35s var(--ease-soft);
+}
+.entry:hover {
+  background: var(--ink-3);
+  border-color: var(--paper-ghost);
+}
+
+.entryGlyph {
+  flex: none;
+  font-family: var(--hanzi);
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--paper);
+}
+
+.entryBody {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.entryQuestion {
+  font-size: 1.05rem;
+  color: var(--paper);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.entryQuestion.muted {
+  color: var(--paper-faint);
+  font-style: italic;
+}
+
+.entryMeta {
+  font-family: var(--sans);
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  color: var(--paper-faint);
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.entryMeta .dot {
+  opacity: 0.5;
+}
+.entryArrow {
+  color: var(--gold);
+}
+
+.foot {
+  padding: 1rem 1.6rem max(1.4rem, env(safe-area-inset-bottom));
+  border-top: 1px solid var(--paper-ghost);
+  display: flex;
+  justify-content: center;
+}
+.clear {
+  font-family: var(--sans);
+  font-size: 0.64rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--paper-ghost);
+}
+.clear:hover {
+  color: var(--cinnabar);
+}

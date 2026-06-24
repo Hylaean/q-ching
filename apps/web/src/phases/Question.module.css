@@ -1,0 +1,99 @@
+.question {
+  gap: clamp(1.3rem, 3.4vh, 2.2rem);
+  max-width: 40rem;
+}
+
+.prompt {
+  font-size: clamp(2rem, 6.5vw, 3rem);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--paper);
+}
+
+.field {
+  position: relative;
+  width: 100%;
+  max-width: var(--measure);
+}
+
+.textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  resize: none;
+  text-align: center;
+  font-family: var(--serif);
+  font-size: clamp(1.15rem, 3vw, 1.5rem);
+  line-height: 1.55;
+  color: var(--paper);
+  padding: 0.6rem 0.2rem;
+  outline: none;
+}
+
+.textarea::placeholder {
+  color: var(--paper-ghost);
+  font-style: italic;
+}
+
+.underline {
+  display: block;
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, var(--paper-ghost), transparent);
+  transition: background 0.5s var(--ease-soft);
+}
+.field:focus-within .underline {
+  background: linear-gradient(90deg, transparent, var(--gold-soft), transparent);
+}
+
+.methods {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  max-width: var(--measure);
+}
+
+.method {
+  flex: 1 1 12rem;
+  text-align: left;
+  border: 1px solid var(--paper-ghost);
+  border-radius: 10px;
+  padding: 0.95rem 1.15rem;
+  background: transparent;
+  transition:
+    border-color 0.45s var(--ease-soft),
+    background-color 0.45s var(--ease-soft),
+    transform 0.45s var(--ease-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.method:hover {
+  border-color: var(--gold-soft);
+}
+
+.method.active {
+  border-color: var(--cinnabar-soft);
+  background: rgba(179, 71, 51, 0.07);
+}
+
+.methodName {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  color: var(--paper);
+}
+.method.active .methodName {
+  color: var(--paper);
+}
+
+.methodBlurb {
+  font-family: var(--sans);
+  font-size: 0.74rem;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  color: var(--paper-faint);
+}
