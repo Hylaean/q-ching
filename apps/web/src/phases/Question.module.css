@@ -1,6 +1,8 @@
 .question {
   gap: clamp(1.3rem, 3.4vh, 2.2rem);
   max-width: 40rem;
+  /* center the column on screen, like the Reading step */
+  margin: 0 auto;
 }
 
 .prompt {
@@ -46,18 +48,34 @@
   background: linear-gradient(90deg, transparent, var(--gold-soft), transparent);
 }
 
+.chooser {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  width: 100%;
+  max-width: var(--measure);
+}
+
+.legend {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--paper-ghost);
+}
+
 .methods {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
-  max-width: var(--measure);
 }
 
 .method {
   flex: 1 1 12rem;
-  text-align: left;
+  text-align: center;
   border: 1px solid var(--paper-ghost);
   border-radius: 10px;
   padding: 0.95rem 1.15rem;
@@ -68,6 +86,7 @@
     transform 0.45s var(--ease-soft);
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 0.3rem;
   -webkit-tap-highlight-color: transparent;
 }
@@ -96,4 +115,56 @@
   line-height: 1.4;
   letter-spacing: 0.01em;
   color: var(--paper-faint);
+}
+
+.sources {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.source {
+  border: 1px solid var(--paper-ghost);
+  border-radius: 999px;
+  padding: 0.4rem 0.95rem;
+  background: transparent;
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  color: var(--paper-faint);
+  transition:
+    border-color 0.45s var(--ease-soft),
+    background-color 0.45s var(--ease-soft),
+    color 0.45s var(--ease-soft);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.source:hover {
+  border-color: var(--gold-soft);
+}
+
+.source.active {
+  border-color: var(--cinnabar-soft);
+  background: rgba(179, 71, 51, 0.07);
+  color: var(--paper);
+}
+
+.source.locked {
+  cursor: default;
+  opacity: 0.85;
+}
+
+.source.locked:hover {
+  border-color: var(--cinnabar-soft);
+}
+
+.hint {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  color: var(--paper-faint);
+  text-align: center;
 }
