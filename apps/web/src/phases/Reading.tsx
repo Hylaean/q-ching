@@ -145,7 +145,7 @@ export function Reading({ reading, question, reducedMotion, onAgain }: ReadingPr
             keep it to return to this same throw.
           </p>
           <button className={styles.seedButton} onClick={copySeed} title="Copy seed">
-            <span className="mono">{seed}</span>
+            <span className={`mono ${styles.seedValue}`}>{seed}</span>
             <span className={styles.copyTag}>{copied ? 'copied' : 'copy'}</span>
           </button>
         </motion.section>

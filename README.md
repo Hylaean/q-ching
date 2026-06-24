@@ -1,101 +1,115 @@
-# q-ching
+<div align="center">
 
-*An I-Ching oracle cast from quantum noise and the motion of your own hand.*
+# ䷜ q-ching
 
-A reading is, at heart, an act of randomness given meaning. q-ching takes that
-literally: it draws each hexagram from a pool of **true / quantum randomness**
-(the NIST quantum beacon, ANU vacuum fluctuations, RANDOM.ORG) mixed with the
-**entropy of your own body** — your mouse path, your touch gesture, your phone's
-motion, the rhythm of your typing — and a local cryptographic RNG that can never
-fail. The same engine runs in a **browser**, on a **phone**, and in a
-**terminal**.
+**An I-Ching oracle cast from quantum noise and the motion of your own hand.**
+
+*Mouse · touch · device-motion · keystrokes — mixed with the quantum vacuum, on your laptop, your phone, and in your terminal.*
+
+</div>
+
+---
+
+A reading has always been an act of randomness given meaning — yarrow stalks and
+coins are just entropy sources with a ritual wrapped around them. **q-ching** takes
+that literally. Every hexagram is drawn from a pool that mixes:
+
+- 🌌 **true / quantum randomness** — the NIST quantum beacon, ANU vacuum fluctuations, RANDOM.ORG
+- ✋ **the entropy of your own body** — your mouse path, touch gesture, the shake of your phone, the rhythm of your typing
+- 🔒 **a local cryptographic RNG** that can *never* fail, so a cast is never blocked
+
+…all folded together and whitened into a single, reproducible **seed**. One engine
+powers three faces: a browser PWA, a phone, and a terminal.
 
 ```
 ䷻  60. 節 (jié) — Limitation
    “Restraint that gives life its shape”
 
-   JUDGMENT: Limitation brings success. But limitation that is galling and
-   bitter must not be made to endure; measure has its own measure…
+   JUDGMENT  Limitation brings success. But limitation that is galling and bitter
+   must not be made to endure; measure has its own measure…
 
-   changing line 4 → becoming ䷹ 58. The Joyous Lake
+   changing line 4  →  becoming ䷹ 58. The Joyous Lake
 ```
 
----
+## ✨ Features
 
-## What's in the box
+- **Two casting rituals** with correct probabilities — the **coin** method (⅛·⅜·⅜·⅛) and the traditional **yarrow stalk** method (1⁄16·5⁄16·7⁄16·3⁄16, where changing lines are rarer).
+- **Changing lines & transformation** — every reading shows the primary hexagram, the moving-line texts, and the hexagram it is *becoming*.
+- **Reproducible, shareable seeds** — each cast exposes the exact seed that produced it; `cast({ seed })` reproduces it perfectly. Readings are auditable and shareable.
+- **The full text** — all 64 hexagrams with judgment, image, a one-line gloss, and six line texts. Original prose, faithful to the classic meaning (no copyrighted translation).
+- **Beautiful by intent** — an ink-wash aesthetic, slow eased animations, a luminous ink trail that follows your hand, and full `prefers-reduced-motion` support.
+- **Runs everywhere from one engine** — `@q-ching/core` is dependency-free and uses only Web Crypto + `fetch`.
 
-```
-q-ching/
-├── packages/core      @q-ching/core — the engine (no dependencies, runs everywhere)
-├── apps/web           React + Vite + Framer Motion PWA  (laptop & mobile)
-└── apps/tui           Ink terminal app  (where live quantum entropy shines)
-```
-
-### `@q-ching/core` — the engine
-- **`EntropyPool`** — an HKDF-style pool. It *absorbs* labelled byte sources, *extracts*
-  a pseudo-random key (the **seed**), and *squeezes* a whitened, uniform stream.
-  No single source can bias the result, and the seed is exposed as a hex
-  `fingerprint()` so any reading is **reproducible and shareable**.
-- **QRNG clients** — `fetchNistBeacon` (keyless), `fetchAnu`, `fetchRandomOrg`,
-  and `localCsprng`. `gatherEntropy()` tries them concurrently and *always* folds
-  in the local CSPRNG, so a flaky API can never block or bias a cast.
-- **`GestureEntropy`** — a platform-agnostic accumulator for mouse / touch /
-  device-motion / keystroke-timing samples.
-- **`cast()`** — correct **coin** (⅛·⅜·⅜·⅛) and **yarrow-stalk** (1⁄16·5⁄16·7⁄16·3⁄16)
-  probability distributions, changing lines, and the transformed hexagram.
-- **The 64 hexagrams** — King Wen order, with a deterministic validator (the 64
-  patterns must be a permutation of all 6-bit values, with correct King Wen
-  pairing) and original interpretive prose (judgment, image, gloss, six line texts).
-
-## Quick start
+## 🚀 Quick start
 
 ```bash
 npm install
-npm run build:core      # build the engine once
+npm run build:core      # build the shared engine first
 
-# Web / PWA (laptop + mobile)
-npm run dev:web         # http://localhost:5173
+npm run dev:web         # → http://localhost:5173   (laptop + phone on your LAN)
+npm run tui             # the terminal ritual (where live quantum entropy works)
 
-# Terminal
-npm run tui
-
-# Verify the engine
-npm run test:core       # distributions, seed reproducibility, dataset integrity
-node packages/core/demo.mjs   # a real cast with live quantum entropy
+npm run test:core       # the proofs: distributions, seed reproducibility, dataset integrity
+node packages/core/demo.mjs   # one real cast with live quantum entropy
 ```
 
-## The ritual (both apps share the arc)
+## 🕯️ The ritual
+
+Both apps share the same arc:
 
 1. **Threshold** — settle, breathe.
 2. **Question** — hold what weighs on you; your keystrokes become entropy.
-3. **Gather** — move/draw (web) while the quantum sources answer; each source
-   shows ✓/✗ as it resolves.
-4. **Cast** — six lines form from the bottom up; changing lines glow.
-5. **Read** — the hexagram, its judgment and image, the changing-line texts, and
-   the hexagram it is *becoming* — plus the seed that reproduces it.
+3. **Gather** — trace the dark with your hand while the quantum sources answer, each resolving to ✓ / ✗.
+4. **Cast** — six lines form from the ground up; changing lines glow cinnabar.
+5. **Read** — the hexagram, its judgment and image, the moving lines, what it is becoming — and the seed that reproduces it.
 
-## Honest notes
+## 🧭 The three surfaces
+
+| | |
+|---|---|
+| **`packages/core`** | `@q-ching/core` — the engine. Entropy pool, QRNG clients, casting math, the 64 hexagrams. No dependencies; runs in browser and Node alike. |
+| **`apps/web`** | React + Vite + Framer Motion **PWA**. Captures mouse, touch, and device-motion entropy. Installable; works on laptop and mobile. |
+| **`apps/tui`** | An **Ink** terminal app. Captures keystroke-timing entropy and — with no browser CORS in the way — pulls the live NIST quantum beacon directly. |
+
+## 🔬 How a cast works
+
+```
+GestureEntropy ─┐
+QRNG (NIST/…) ──┼─▶ EntropyPool ─▶ squeeze ─▶ six lines ─▶ primary hexagram
+local CSPRNG  ──┘   (extract: PRK = SHA-256(sources))      └▶ changing lines ─▶ transformed
+                    (expand:  out = SHA-256(PRK‖counter))
+                     fingerprint(PRK) = the shareable seed
+```
+
+The pool is HKDF-style: it *extracts* a pseudo-random key from every source, so no
+single source can bias the result, then *expands* a uniform stream to draw the
+lines. The PRK's hex fingerprint **is** the seed. For the deeper architecture and
+conventions, see [`CLAUDE.md`](./CLAUDE.md).
+
+## 🤔 Honest notes
 
 - **Quantum randomness is for *meaning*, not quality.** A modern CSPRNG is already
   statistically perfect for casting an oracle. The quantum sources are here for the
   story — your hexagram drawn from vacuum fluctuations and a cosmic beacon — and for
-  transparency, not because they are "more random." The engine is candid about this.
-- **Browser CORS.** In a browser, the NIST/ANU endpoints are usually blocked by CORS
-  and come back unavailable; the UI shows this plainly and the local entropy carries
-  the cast. For live quantum entropy in the browser, put a tiny serverless proxy in
-  front (noted in the web app but not built). **The TUI has no CORS**, so it pulls the
-  NIST beacon directly — that's its edge.
+  transparency. The engine is candid about this.
+- **Browser CORS.** In a browser the NIST/ANU endpoints are usually CORS-blocked and
+  shown as unreachable while local entropy carries the cast — this is expected, not a
+  bug. For live quantum entropy in the browser, put a small serverless proxy in front
+  (noted, not built). The **terminal app has no CORS**, so it reaches the beacon directly.
 - **Text licensing.** The famous Wilhelm–Baynes translation is under copyright. The
-  interpretive prose here is **original**, written in the spirit of the classic
-  I-Ching — faithful to each hexagram's meaning, copied from no one.
+  interpretive prose here is **original**, written in the spirit of the classic I-Ching
+  and faithful to each hexagram's meaning — copied from no one.
 
-## Cross-platform entropy (the "alternatives to mouse" answer)
+## 🗺️ Roadmap
 
-Mouse movement only exists on a laptop. The engine captures, with the same
-mechanic everywhere:
+- A serverless QRNG proxy so the browser also gets live quantum entropy.
+- Bring-your-own ANU / RANDOM.ORG API keys (the clients already accept them).
+- Polished PWA icons and screenshots.
 
-| Platform | Gesture source |
-|----------|----------------|
-| Laptop   | mouse path (`pointermove`) + keystroke timing |
-| Mobile   | touch path + **device motion** (shake to cast) |
-| Terminal | keystroke timing (inter-key intervals) |
+## 🛠️ Tech
+
+TypeScript monorepo (npm workspaces) · React 18 · Vite 5 · Framer Motion 11 · Ink 5 · Web Crypto · zero-dependency core.
+
+<div align="center">
+<sub>made with stillness · 易</sub>
+</div>

@@ -192,24 +192,30 @@
 }
 
 .seedButton {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 0.8rem;
+  width: 100%;
   max-width: 100%;
   padding: 0.65rem 0.95rem;
   border: 1px solid var(--paper-ghost);
   border-radius: 8px;
   background: rgba(26, 24, 21, 0.6);
   transition: border-color 0.4s var(--ease-soft);
+  text-align: left;
+  /* establish a query container so the seed can size itself to the box width */
+  container-type: inline-size;
 }
 .seedButton:hover {
   border-color: var(--gold-soft);
 }
-.seedButton .mono {
-  overflow: hidden;
-  text-overflow: ellipsis;
+/* The full 64-char seed stays on ONE line, scaling to fit the box at any width. */
+.seedValue {
+  flex: 1 1 auto;
+  min-width: 0;
   white-space: nowrap;
-  max-width: 16rem;
+  letter-spacing: 0;
+  font-size: min(0.74rem, 1.85cqw);
 }
 
 .copyTag {

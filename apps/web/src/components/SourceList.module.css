@@ -11,6 +11,7 @@
 .row {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.8rem;
   font-size: 0.82rem;
   color: var(--paper-faint);
@@ -62,7 +63,7 @@
 }
 
 .name {
-  flex: 1;
+  flex: 0 1 auto;
   text-align: left;
   letter-spacing: 0.02em;
 }
