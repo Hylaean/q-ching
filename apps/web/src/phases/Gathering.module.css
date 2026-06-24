@@ -2,12 +2,17 @@
   position: relative;
   min-height: 100svh;
   width: 100%;
+  /* let a finger drag draw the trail instead of scrolling/refreshing the page */
+  touch-action: none;
 }
 
 .canvas {
   position: fixed;
   inset: 0;
-  z-index: 0;
+  /* the ink trail rides on TOP of everything while seeding; it captures input
+     from the window and is pointer-events:none, so buttons beneath stay clickable */
+  z-index: 6;
+  pointer-events: none;
 }
 
 .overlay {
@@ -15,6 +20,8 @@
   z-index: 2;
   gap: clamp(1.3rem, 3.2vh, 2rem);
   max-width: 34rem;
+  /* center the column on screen, like the Reading step */
+  margin: 0 auto;
   /* let pointer events fall through to the canvas, except on interactive bits */
   pointer-events: none;
 }

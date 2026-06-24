@@ -59,43 +59,25 @@ export function InkCanvas({ gesture, onSample, reducedMotion, className }: InkCa
     [gesture, onSample],
   );
 
-  // Pointer handlers (covers mouse, touch, and pen via Pointer Events).
+  // Pointer handlers. We listen on `window`, not the canvas element, so the
+  // canvas can render on TOP of everything (pointer-events: none) while the
+  // trail still tracks the pointer and the buttons beneath stay clickable.
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    let drawing = false;
-
-    const down = (e: PointerEvent) => {
-      drawing = true;
-      canvas.setPointerCapture?.(e.pointerId);
-      sample(e.clientX, e.clientY);
-    };
     const move = (e: PointerEvent) => {
       // coalesced events give smoother trails + richer timing entropy
-      const events =
-        'getCoalescedEvents' in e ? (e.getCoalescedEvents() as PointerEvent[]) : [e];
-      if (drawing) {
-        for (const ev of events) sample(ev.clientX, ev.clientY);
-      } else {
-        // even hover (desktop) gives a faint trail + a little entropy
-        sample(e.clientX, e.clientY);
-      }
+      const coalesced =
+        'getCoalescedEvents' in e ? (e.getCoalescedEvents() as PointerEvent[]) : [];
+      const events = coalesced.length ? coalesced : [e];
+      for (const ev of events) sample(ev.clientX, ev.clientY);
     };
-    const up = () => {
-      drawing = false;
-    };
+    const down = (e: PointerEvent) => sample(e.clientX, e.clientY);
 
-    canvas.addEventListener('pointerdown', down);
-    canvas.addEventListener('pointermove', move);
-    window.addEventListener('pointerup', up);
-    canvas.addEventListener('pointercancel', up);
+    window.addEventListener('pointermove', move, { passive: true });
+    window.addEventListener('pointerdown', down, { passive: true });
 
     return () => {
-      canvas.removeEventListener('pointerdown', down);
-      canvas.removeEventListener('pointermove', move);
-      window.removeEventListener('pointerup', up);
-      canvas.removeEventListener('pointercancel', up);
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerdown', down);
     };
   }, [sample]);
 
