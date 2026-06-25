@@ -48,6 +48,7 @@ npm run build:core      # build the shared engine first
 
 npm run dev:web         # → http://localhost:5173   (laptop + phone on your LAN)
 npm run tui             # the terminal ritual (where live quantum entropy works)
+npm run mcp             # the oracle as an MCP server (Claude Desktop / Claude Code / agents)
 
 npm run test:core       # the proofs: distributions, seed reproducibility, dataset integrity
 node packages/core/demo.mjs   # one real cast with live quantum entropy
@@ -63,13 +64,41 @@ Both apps share the same arc:
 4. **Cast** — six lines form from the ground up; changing lines glow cinnabar.
 5. **Read** — the hexagram, its judgment and image, the moving lines, what it is becoming — and the seed that reproduces it.
 
-## 🧭 The three surfaces
+## 🧭 The surfaces
+
+One engine, many faces — every app and tool is a thin client over `@q-ching/core`.
 
 | | |
 |---|---|
 | **`packages/core`** | `@q-ching/core` — the engine. Entropy pool, QRNG clients, casting math, the 64 hexagrams. No dependencies; runs in browser and Node alike. |
-| **`apps/web`** | React + Vite + Framer Motion **PWA**. Captures mouse, touch, and device-motion entropy. Installable; works on laptop and mobile. |
+| **`apps/web`** | React + Vite + Framer Motion **PWA**. Captures mouse, touch, and device-motion entropy. Installable; works on laptop and mobile. Deploys to **[qching.hylaean.com](https://qching.hylaean.com)** via GitHub Pages. |
 | **`apps/tui`** | An **Ink** terminal app. Captures keystroke-timing entropy and — with no browser CORS in the way — pulls the live NIST quantum beacon directly. |
+| **`apps/mcp`** | `@q-ching/mcp` — an **MCP server** exposing the oracle as a `cast_reading` tool, so Claude Desktop, Claude Code, and other agents can consult it. Live quantum entropy, like the TUI. |
+| **`experiments/oracle-guided`** | An A/B harness: does consulting the oracle actually change how an LLM advises? Guided arm vs. control, with every reading's seed logged for replay. |
+
+## 🤖 Consult the oracle from your agent (MCP)
+
+The terminal isn't the only way in. `apps/mcp` is a [Model Context Protocol](https://modelcontextprotocol.io)
+server that exposes one tool — **`cast_reading`** — so any MCP client can ask the oracle a
+question and be guided by the hexagram it draws. Being a Node process with no browser CORS,
+it reaches the live quantum sources directly.
+
+```bash
+npm run build:core && npm run build:mcp
+claude mcp add q-ching -- node "$PWD/apps/mcp/dist/index.js"   # Claude Code
+```
+
+Then: *"consult the q-ching oracle about X."* See [`apps/mcp/README.md`](./apps/mcp/README.md)
+for the Claude Desktop config and the full tool reference.
+
+## 🔮 woo-woo coding (a Claude Code skill)
+
+For when the vibe coding is done and only the cosmos can tell you whether to ship: the
+bundled **`woo-woo`** skill (`.claude/skills/woo-woo/`) turns Claude into the *Oracle of the
+Quantum Codebase*. You don't interrogate the universe — you **cast once, and you trust it**.
+One hexagram, drawn through the MCP tool from quantum noise, read back to you in wildly
+over-the-top mystical prophecy. Type `/woo-woo` (or just ask the spirits what they make of
+your code) and surrender.
 
 ## 🔬 How a cast works
 
@@ -103,12 +132,13 @@ conventions, see [`CLAUDE.md`](./CLAUDE.md).
 ## 🗺️ Roadmap
 
 - A serverless QRNG proxy so the browser also gets live quantum entropy.
+- A **remote MCP / A2A** endpoint (a small Cloudflare Worker at `mcp.qching.hylaean.com`) so web and cloud agents can consult the oracle too — without touching the Pages deploy.
 - Bring-your-own ANU / RANDOM.ORG API keys (the clients already accept them).
 - Polished PWA icons and screenshots.
 
 ## 🛠️ Tech
 
-TypeScript monorepo (npm workspaces) · React 18 · Vite 5 · Framer Motion 11 · Ink 5 · Web Crypto · zero-dependency core.
+TypeScript monorepo (npm workspaces) · React 18 · Vite 5 · Framer Motion 11 · Ink 5 · Model Context Protocol · Web Crypto · zero-dependency core.
 
 <div align="center">
 <sub>made with stillness · 易</sub>
