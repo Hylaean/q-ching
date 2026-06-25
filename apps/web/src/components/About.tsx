@@ -47,7 +47,7 @@ const COPY: Record<Locale, Copy> = {
       {
         label: 'An experiment',
         title: 'Does the oracle move the advice?',
-        body: 'A small A/B harness asks a sharper question: when a language model is required to read the hexagram first, does its counsel genuinely change? Each dilemma is run twice — once freely as a control, once guided by the cast — with every seed logged so the exact reading can be replayed and audited.',
+        body: 'A small A/B harness asks a sharper question: when a language model must read the hexagram first, does its counsel genuinely change? Ten dilemmas are run twice each — once freely as a control, once guided by the cast — across two model providers, with every seed logged and every verdict blind-coded by independent judges. The honest answer so far: the reading reshapes how the case is argued, but it did not systematically move the bottom-line recommendation.',
       },
     ],
     readAnalysis: 'Read the analysis',
@@ -72,7 +72,7 @@ const COPY: Record<Locale, Copy> = {
       {
         label: 'Une expérience',
         title: 'L’oracle déplace-t-il le conseil ?',
-        body: 'Un petit banc d’essai A/B pose une question plus tranchante : lorsqu’un modèle de langage doit d’abord lire l’hexagramme, son conseil change-t-il réellement ? Chaque dilemme est joué deux fois — une fois librement, en témoin, une fois guidé par le tirage — chaque graine étant consignée pour rejouer et vérifier la lecture exacte.',
+        body: 'Un petit banc d’essai A/B pose une question plus tranchante : lorsqu’un modèle de langage doit d’abord lire l’hexagramme, son conseil change-t-il réellement ? Dix dilemmes sont joués deux fois chacun — une fois librement, en témoin, une fois guidés par le tirage — sur deux fournisseurs de modèles, chaque graine étant consignée et chaque verdict codé à l’aveugle par des juges indépendants. La réponse honnête, à ce stade : le tirage remodèle la façon d’argumenter, mais il n’a pas systématiquement déplacé la recommandation finale.',
       },
     ],
     readAnalysis: 'Lire l’analyse',
