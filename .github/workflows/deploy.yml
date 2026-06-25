@@ -32,7 +32,10 @@ jobs:
           node-version: 20
           cache: npm
 
-      - run: npm ci
+      # `npm ci` can't install rollup's platform-specific native binary on the Linux
+      # runner when the lockfile was generated on another OS (npm/cli#4828). `npm install`
+      # resolves the correct optional dependency for the runner's platform.
+      - run: npm install
 
       # Build the engine first — apps/web resolves @q-ching/core from its dist/.
       - run: npm run build:core
