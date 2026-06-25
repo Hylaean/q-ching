@@ -107,6 +107,51 @@
   text-wrap: pretty;
 }
 
+/* ---- now: a present-day lens, set in a modern face ------------------------ */
+/* Deliberately a different typeface, left-aligned, and lightly framed so it
+   reads as a contemporary annotation beside the centered classical prose. */
+.now {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.7rem;
+  width: 100%;
+  max-width: var(--measure);
+  text-align: left;
+  padding: clamp(1.3rem, 4vw, 1.9rem) clamp(1.3rem, 4vw, 2rem);
+  border: 1px solid var(--paper-ghost);
+  border-left: 2px solid var(--cinnabar-soft);
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(179, 71, 51, 0.05), rgba(26, 24, 21, 0.35));
+}
+
+.nowLabel {
+  font-family: var(--font-now);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--cinnabar);
+}
+
+.nowHook {
+  font-family: var(--font-now);
+  font-size: clamp(1.3rem, 3.6vw, 1.7rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.18;
+  color: var(--paper);
+}
+
+.nowBody {
+  font-family: var(--font-now);
+  font-size: clamp(1rem, 2.4vw, 1.12rem);
+  font-weight: 400;
+  line-height: 1.62;
+  color: var(--paper-dim);
+  text-wrap: pretty;
+}
+
 /* ---- changing lines ------------------------------------------------------- */
 
 .changing {
@@ -156,6 +201,16 @@
   color: var(--cinnabar);
 }
 
+/* the present-day echo of a changing line, in the modern face */
+.nowLine {
+  font-family: var(--font-now);
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  line-height: 1.55;
+  color: var(--paper-dim);
+  max-width: 28rem;
+  text-wrap: pretty;
+}
+
 /* ---- becoming (transformed) ---------------------------------------------- */
 
 .becoming {
@@ -171,6 +226,22 @@
   font-size: 1.25rem;
   color: var(--gold);
   margin: 1.2rem 0 1.6rem;
+}
+
+/* a modern note on the movement itself, between the label and the new hexagram */
+.transition {
+  font-family: var(--font-now);
+  font-size: clamp(0.95rem, 2.2vw, 1.05rem);
+  line-height: 1.6;
+  color: var(--paper-faint);
+  max-width: 30rem;
+  margin: -0.6rem 0 1.8rem;
+  text-wrap: pretty;
+}
+
+/* the becoming hexagram's own Now card sits a little below its gloss */
+.becoming .now {
+  margin-top: 1.6rem;
 }
 
 /* ---- seed ----------------------------------------------------------------- */

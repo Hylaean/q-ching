@@ -22,6 +22,8 @@
   --serif: 'Cormorant Garamond', 'Noto Serif SC', Georgia, 'Times New Roman', serif;
   --hanzi: 'Noto Serif SC', 'Cormorant Garamond', serif;
   --sans: 'Inter', system-ui, -apple-system, sans-serif;
+  /* the "now" voice — a modern grotesque, deliberately not the ancient serif */
+  --font-now: 'Space Grotesk', 'Inter', system-ui, sans-serif;
   --mono: ui-monospace, 'SF Mono', 'JetBrains Mono', 'Menlo', monospace;
 
   /* motion */

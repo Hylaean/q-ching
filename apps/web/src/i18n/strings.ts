@@ -58,6 +58,7 @@ const en: Dict = {
 
   'reading.judgment': 'The Judgment',
   'reading.image': 'The Image',
+  'reading.now': 'Now',
   'reading.linesInMotion': 'Lines in Motion',
   'reading.becoming': 'this is becoming…',
   'reading.hexagram': 'Hexagram {n}',
@@ -133,6 +134,7 @@ const fr: Dict = {
 
   'reading.judgment': 'Le Jugement',
   'reading.image': 'L’Image',
+  'reading.now': 'Maintenant',
   'reading.linesInMotion': 'Lignes en mouvement',
   'reading.becoming': 'ceci devient…',
   'reading.hexagram': 'Hexagramme {n}',

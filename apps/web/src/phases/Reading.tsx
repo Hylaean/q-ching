@@ -5,6 +5,8 @@ import { HexagramGlyph } from '../components/HexagramGlyph';
 import { LineStack, bitsToLines } from '../components/LineStack';
 import { useI18n } from '../i18n';
 import { hexText } from '../i18n/hexText';
+import { NOW_READINGS, transitionNote } from '../content/now';
+import { NOW_LINES } from '../content/now-lines';
 import styles from './Reading.module.css';
 
 interface ReadingProps {
@@ -32,6 +34,9 @@ export function Reading({ reading, question, reducedMotion, onAgain }: ReadingPr
   const { primary, transformed, changingPositions, lines, seed, method } = reading;
   const primaryText = hexText(primary, locale);
   const transformedText = transformed ? hexText(transformed, locale) : null;
+  const now = NOW_READINGS[primary.number];
+  const nowBecoming = transformed ? NOW_READINGS[transformed.number] : undefined;
+  const nowLines = NOW_LINES[primary.number];
   const [copied, setCopied] = useState(false);
   const copyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -103,6 +108,15 @@ export function Reading({ reading, question, reducedMotion, onAgain }: ReadingPr
           <p className={styles.prose}>{primaryText.image}</p>
         </motion.section>
 
+        {/* ---- Now: a present-day lens (original, modern voice) ------------- */}
+        {now && (
+          <motion.section className={styles.now} {...section(0.05)}>
+            <p className={styles.nowLabel}>{t('reading.now')}</p>
+            <p className={styles.nowHook}>{now.hook}</p>
+            <p className={styles.nowBody}>{now.body}</p>
+          </motion.section>
+        )}
+
         {/* ---- Changing lines ---------------------------------------------- */}
         {changingPositions.length > 0 && (
           <motion.section className={styles.changing} {...section(0.05)}>
@@ -112,6 +126,7 @@ export function Reading({ reading, question, reducedMotion, onAgain }: ReadingPr
                 <li key={pos} className={styles.changeItem}>
                   <span className={styles.changeOrdinal}>{t('reading.line.' + pos)}</span>
                   <p className={styles.prose}>{primaryText.lineTexts[pos - 1]}</p>
+                  {nowLines?.[pos - 1] && <p className={styles.nowLine}>{nowLines[pos - 1]}</p>}
                 </li>
               ))}
             </ul>
@@ -125,6 +140,7 @@ export function Reading({ reading, question, reducedMotion, onAgain }: ReadingPr
               <span className="rule__diamond" />
             </div>
             <p className={styles.becomingLabel}>{t('reading.becoming')}</p>
+            <p className={styles.transition}>{transitionNote(primaryText.name, transformedText.name)}</p>
             <div className={styles.glyphRow}>
               <HexagramGlyph symbol={transformed.symbol} size="medium" label={transformedText.name} />
               <div className={styles.lineCol}>
@@ -141,6 +157,13 @@ export function Reading({ reading, question, reducedMotion, onAgain }: ReadingPr
               <span className={styles.english}>{transformedText.name}</span>
             </p>
             <p className={styles.gloss}>{transformedText.gloss}</p>
+            {nowBecoming && (
+              <div className={styles.now}>
+                <p className={styles.nowLabel}>{t('reading.now')}</p>
+                <p className={styles.nowHook}>{nowBecoming.hook}</p>
+                <p className={styles.nowBody}>{nowBecoming.body}</p>
+              </div>
+            )}
           </motion.section>
         )}
 
