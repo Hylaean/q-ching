@@ -1,8 +1,12 @@
-# Experiment: oracle-guided vs. control — OpenAI edition
+# Experiment: oracle-guided vs. control — multi-provider edition
 
-The same A/B experiment as [`../oracle-guided`](../oracle-guided/), but run against an
-**OpenAI** model instead of Claude. It can authenticate two ways — an OpenAI API key, or
-your **ChatGPT-plan login reused from Codex**.
+The same A/B experiment as [`../oracle-guided`](../oracle-guided/), runnable three ways,
+each reusing credentials you already have:
+
+- **`--codex`** — your ChatGPT-plan login reused from Codex (OpenAI Responses backend).
+- **default** — an OpenAI Platform API key (Chat Completions).
+- **`--anthropic`** — your Claude subscription via the official `claude -p` CLI, the way
+  OpenClaw drives it.
 
 **Question:** does consulting the q-ching oracle actually change how the model advises —
 or does it just rationalize whatever it was going to say?
@@ -17,7 +21,7 @@ For each prompt, the harness runs two arms with the **same model and settings**:
 It logs both answers and the guided arm's **exact reading + reproducible seed**, so
 every run is auditable and replayable with `cast({ seed })`.
 
-## Two ways to authenticate
+## Three ways to authenticate
 
 ### A. ChatGPT plan, reused from Codex (`--codex`)
 
@@ -52,6 +56,37 @@ Notes and honest caveats:
   reasoning, and tool calls purely via stream events, which the advisor collects.
 - Set `QCHING_DEBUG=1` to print per-turn output-item types and text length to stderr.
 
+### C. Claude subscription, via the official CLI (`--anthropic`)
+
+Run the Anthropic arm on your **Claude Pro/Max subscription** the way OpenClaw does it —
+by driving the official **`claude -p`** (Claude Code, headless) as a local subprocess.
+The OAuth token never leaves Claude Code; we only invoke the sanctioned client, so this
+stays within Anthropic's terms. (Anthropic forbids reusing a subscription OAuth *token*
+in third-party tools — the April 2026 OpenClaw ban — but driving `claude`/`claude -p` for
+personal scripts is supported; `claude setup-token` exists for exactly this.)
+
+The guided arm gives Claude the oracle through **this repo's q-ching MCP server**, so the
+model genuinely calls `cast_reading` itself — the faithful analogue of the OpenAI arms.
+
+```bash
+npm run build:core
+npm run build --workspace @q-ching/mcp     # the oracle tool the guided arm calls
+claude /login                              # if not already logged in to your subscription
+npm run start --workspace @q-ching/exp-oracle-guided-openai -- --anthropic
+npm run start --workspace @q-ching/exp-oracle-guided-openai -- --anthropic "your dilemma"
+```
+
+Notes:
+
+- **Personal use.** Per Anthropic's June 15 2026 change, this draws from your monthly
+  Agent SDK credit first, then usage credits at standard API rates. For shared/production
+  automation Anthropic directs you to an API key instead.
+- The advisor runs `claude -p` from a neutral temp dir so the repo's `CLAUDE.md` doesn't
+  bias it; both arms share Claude Code's base harness prompt, so the oracle remains the
+  only difference between them.
+- Model follows your Claude Code default; override with `ANTHROPIC_MODEL`. Override the
+  binary with `CLAUDE_BIN`.
+
 ### B. OpenAI Platform API key (default)
 
 Resolved in order: `OPENAI_API_KEY` env, then a **key-mode** `~/.codex/auth.json`
@@ -73,13 +108,16 @@ the hexagram and seed.
 
 | Env var                   | Default                                 | Notes                                                          |
 | ------------------------- | --------------------------------------- | -------------------------------------------------------------- |
-| `--codex` flag / `OPENAI_AUTH=codex` | off                          | Use the ChatGPT-plan login from Codex (mode A).                |
+| `--codex` / `OPENAI_AUTH=codex`      | off                          | Mode A — ChatGPT-plan login from Codex.                        |
+| `--anthropic` / `QCHING_AUTH=anthropic` | off                       | Mode C — Claude subscription via `claude -p`.                  |
 | `OPENAI_API_KEY`          | —                                       | Mode B; highest priority, else key-mode `auth.json`.           |
 | `OPENAI_MODEL`            | Codex's model, else `gpt-5.5`           | Mode A reads `config.toml`; mode B defaults to `gpt-5`.        |
+| `ANTHROPIC_MODEL`         | Claude Code default                     | Mode C; passed as `claude -p --model`.                         |
 | `OPENAI_REASONING_EFFORT` | `medium`                                | `minimal` / `low` / `medium` / `high`; `none` omits it.        |
 | `CODEX_BASE_URL`          | `https://chatgpt.com/backend-api/codex` | Codex Responses backend (mode A).                              |
 | `CODEX_HOME`              | `~/.codex`                              | Where `auth.json` / `config.toml` live.                        |
-| `QCHING_DEBUG`            | off                                     | Print per-turn output-item types + text length to stderr.     |
+| `CLAUDE_BIN`              | `claude`                                | Mode C; path to the Claude Code CLI.                           |
+| `QCHING_DEBUG`            | off                                     | Mode A — print per-turn output-item types to stderr.          |
 
 ## Notes
 

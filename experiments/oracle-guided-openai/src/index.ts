@@ -29,6 +29,7 @@ import {
   type ArmResult,
   type GuidedResult,
 } from './advisor.js';
+import { ClaudeCliAdvisor } from './claude-cli.js';
 import { DEFAULT_QUESTIONS } from './questions.js';
 
 interface QuestionResult {
@@ -39,6 +40,16 @@ interface QuestionResult {
 
 /** Build the advisor for the selected auth mode. Throws with actionable text on bad creds. */
 function buildAdvisor(): { advisor: Advisor; mode: string } {
+  // Anthropic arm: drive the local `claude -p` on your Claude subscription (OpenClaw's method).
+  if (process.argv.includes('--anthropic') || process.env.QCHING_AUTH?.toLowerCase() === 'anthropic') {
+    const model = process.env.ANTHROPIC_MODEL?.trim() || '';
+    console.error('Auth: Claude subscription via the local `claude` CLI (claude -p) — personal use');
+    console.error(
+      `Engine: claude -p${model ? ` --model ${model}` : ' (subscription default model)'}; oracle via the q-ching MCP server`,
+    );
+    return { advisor: new ClaudeCliAdvisor(model), mode: `claude-cli/${model || 'default'}` };
+  }
+
   const useCodex =
     process.argv.includes('--codex') || process.env.OPENAI_AUTH?.toLowerCase() === 'codex';
 
@@ -71,7 +82,7 @@ function buildAdvisor(): { advisor: Advisor; mode: string } {
 
 function toMarkdown(results: QuestionResult[], mode: string, startedAt: string): string {
   const md: string[] = [
-    '# Oracle-guided vs. control (OpenAI)',
+    '# Oracle-guided vs. control',
     '',
     `Mode: \`${mode}\` · run: ${startedAt}`,
     '',
