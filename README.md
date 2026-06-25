@@ -6,6 +6,19 @@
 
 *Mouse · touch · device-motion · keystrokes — mixed with the quantum vacuum, on your laptop, your phone, and in your terminal.*
 
+<p>
+  <a href="https://github.com/Hylaean/q-ching/actions/workflows/ci.yml"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/Hylaean/q-ching/ci.yml?branch=main&label=CI&style=flat-square&logo=githubactions&logoColor=white"></a>
+  <a href="./LICENSE"><img alt="License: MIT" src="https://img.shields.io/github/license/Hylaean/q-ching?style=flat-square&color=4c6b8a"></a>
+  <img alt="Node >= 20" src="https://img.shields.io/node/v/@q-ching/core?style=flat-square&logo=nodedotjs&logoColor=white&color=339933">
+  <a href="https://github.com/Hylaean/q-ching/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/Hylaean/q-ching?style=flat-square&logo=github&color=8a6d3b"></a>
+</p>
+
+<p>
+  <a href="https://www.npmjs.com/package/@q-ching/core"><img alt="@q-ching/core on npm" src="https://img.shields.io/npm/v/@q-ching/core?style=flat-square&logo=npm&logoColor=white&label=%40q-ching%2Fcore&color=c0392b"></a>
+  <a href="https://www.npmjs.com/package/@q-ching/tui"><img alt="@q-ching/tui on npm" src="https://img.shields.io/npm/v/@q-ching/tui?style=flat-square&logo=npm&logoColor=white&label=%40q-ching%2Ftui&color=c0392b"></a>
+  <a href="https://www.npmjs.com/package/@q-ching/mcp"><img alt="@q-ching/mcp on npm" src="https://img.shields.io/npm/v/@q-ching/mcp?style=flat-square&logo=npm&logoColor=white&label=%40q-ching%2Fmcp&color=c0392b"></a>
+</p>
+
 </div>
 
 ---
@@ -93,10 +106,10 @@ One engine, many faces — every app and tool is a thin client over `@q-ching/co
 
 | | |
 |---|---|
-| **`packages/core`** | `@q-ching/core` — the engine. Entropy pool, QRNG clients, casting math, the 64 hexagrams. No dependencies; runs in browser and Node alike. |
+| **`packages/core`** | [![npm](https://img.shields.io/npm/v/@q-ching/core?style=flat-square&logo=npm&logoColor=white&label=%40q-ching%2Fcore&color=c0392b)](https://www.npmjs.com/package/@q-ching/core) — the engine. Entropy pool, QRNG clients, casting math, the 64 hexagrams. No dependencies; runs in browser and Node alike. |
 | **`apps/web`** | React + Vite + Framer Motion **PWA**. Captures mouse, touch, and device-motion entropy. Installable; works on laptop and mobile. Deploys to **[qching.hylaean.com](https://qching.hylaean.com)** via GitHub Pages. |
-| **`apps/tui`** | An **Ink** terminal app. Captures keystroke-timing entropy and — with no browser CORS in the way — pulls the live NIST quantum beacon directly. |
-| **`apps/mcp`** | `@q-ching/mcp` — an **MCP server** exposing the oracle as a `cast_reading` tool, so Claude Desktop, Claude Code, and other agents can consult it. Live quantum entropy, like the TUI. |
+| **`apps/tui`** | [![npm](https://img.shields.io/npm/v/@q-ching/tui?style=flat-square&logo=npm&logoColor=white&label=%40q-ching%2Ftui&color=c0392b)](https://www.npmjs.com/package/@q-ching/tui) — an **Ink** terminal app. Captures keystroke-timing entropy and — with no browser CORS in the way — pulls the live NIST quantum beacon directly. |
+| **`apps/mcp`** | [![npm](https://img.shields.io/npm/v/@q-ching/mcp?style=flat-square&logo=npm&logoColor=white&label=%40q-ching%2Fmcp&color=c0392b)](https://www.npmjs.com/package/@q-ching/mcp) — an **MCP server** exposing the oracle as a `cast_reading` tool, so Claude Desktop, Claude Code, and other agents can consult it. Live quantum entropy, like the TUI. |
 | **`experiments/oracle-guided`** | An A/B harness: does consulting the oracle actually change how an LLM advises? Guided arm vs. control, with every reading's seed logged for replay. |
 
 ## 🤖 Consult the oracle from your agent (MCP)
