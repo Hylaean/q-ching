@@ -38,7 +38,7 @@ function mcpServerPath(): string {
   const here = path.dirname(fileURLToPath(import.meta.url));
   const p = path.resolve(here, '../../../apps/mcp/dist/index.js');
   if (!existsSync(p)) {
-    throw new Error(`q-ching MCP server not built at ${p}.\nRun: npm run build --workspace @q-ching/mcp`);
+    throw new Error(`q-ching MCP server not built at ${p}.\nRun: npm run build --workspace @hylaean/mcp`);
   }
   return p;
 }

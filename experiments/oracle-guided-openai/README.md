@@ -14,7 +14,7 @@ or does it just rationalize whatever it was going to say?
 For each prompt, the harness runs two arms with the **same model and settings**:
 
 - **control** — the model answers the dilemma directly.
-- **guided** — the model must first call `consult_oracle` (the real `@q-ching/core`
+- **guided** — the model must first call `consult_oracle` (the real `@hylaean/core`
   engine, with live quantum entropy), then let the hexagram's Judgment, Image, and
   changing-line texts shape its guidance.
 
@@ -70,10 +70,10 @@ model genuinely calls `cast_reading` itself — the faithful analogue of the Ope
 
 ```bash
 npm run build:core
-npm run build --workspace @q-ching/mcp     # the oracle tool the guided arm calls
+npm run build --workspace @hylaean/mcp     # the oracle tool the guided arm calls
 claude /login                              # if not already logged in to your subscription
-npm run start --workspace @q-ching/exp-oracle-guided-openai -- --anthropic
-npm run start --workspace @q-ching/exp-oracle-guided-openai -- --anthropic "your dilemma"
+npm run start --workspace @hylaean/exp-oracle-guided-openai -- --anthropic
+npm run start --workspace @hylaean/exp-oracle-guided-openai -- --anthropic "your dilemma"
 ```
 
 Notes:

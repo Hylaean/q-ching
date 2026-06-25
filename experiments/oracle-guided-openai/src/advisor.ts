@@ -6,7 +6,7 @@
  * what isolates the oracle's effect.
  */
 import OpenAI from 'openai';
-import { cast } from '@q-ching/core';
+import { cast } from '@hylaean/core';
 import { formatReading } from './format.js';
 
 export const MAX_TOKENS = 16000;

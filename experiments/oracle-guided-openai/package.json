@@ -1,5 +1,5 @@
 {
-  "name": "@q-ching/exp-oracle-guided-openai",
+  "name": "@hylaean/exp-oracle-guided-openai",
   "version": "0.1.0",
   "private": true,
   "description": "OpenAI edition of the oracle-guided A/B experiment: does consulting the q-ching oracle change how an OpenAI model advises? Uses a key reused from Codex.",
@@ -9,7 +9,7 @@
     "build": "tsc --noEmit"
   },
   "dependencies": {
-    "@q-ching/core": "*",
+    "@hylaean/core": "*",
     "openai": "*"
   },
   "devDependencies": {
