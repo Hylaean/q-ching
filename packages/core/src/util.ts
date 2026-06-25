@@ -44,11 +44,11 @@ export function getCrypto(): Crypto {
 }
 
 export async function sha256(data: Uint8Array): Promise<Uint8Array> {
-  // copy into a fresh ArrayBuffer-backed view so digest accepts it everywhere
-  const buf = data.byteOffset === 0 && data.byteLength === data.buffer.byteLength
-    ? data.buffer
-    : data.slice().buffer;
-  const digest = await getCrypto().subtle.digest('SHA-256', buf);
+  // Copy into a fresh ArrayBuffer-backed view so digest accepts it under every
+  // TS/lib version: a raw `.buffer` is `ArrayBufferLike`, which now includes
+  // `SharedArrayBuffer` and is no longer assignable to `BufferSource`.
+  const view = new Uint8Array(data);
+  const digest = await getCrypto().subtle.digest('SHA-256', view);
   return new Uint8Array(digest);
 }
 

@@ -12,7 +12,7 @@ const fade = {
   show: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.2 + i * 0.28 },
+    transition: { duration: 1.1, ease: [0.22, 1, 0.36, 1] as const, delay: 0.2 + i * 0.28 },
   }),
 };
 

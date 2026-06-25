@@ -44,5 +44,8 @@
     "test": "tsc -p tsconfig.test.json && node --test dist/*.test.js",
     "prepublishOnly": "npm run build"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "devDependencies": {
+    "@types/node": "^20.14.0"
+  }
 }

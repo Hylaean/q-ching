@@ -28,6 +28,16 @@ cd packages/core && npx tsc -p tsconfig.test.json
 node --test --test-name-pattern="coin distribution" dist/*.test.js
 ```
 
+### Before committing (the green gate)
+
+CI's gate (`.github/workflows/ci.yml`) is just `npm run build` + `npm run test:core`. A **pre-commit hook** (`.githooks/pre-commit`, wired up by the `prepare` script on `npm install`) runs the same two commands so a red commit can't leave your machine. Bypass with `git commit --no-verify` only when you truly must.
+
+```bash
+npm run build && npm run test:core   # what CI and the hook both run
+```
+
+**CI builds against the locked dependency versions** (`npm ci` reads `package-lock.json`), and a local `node_modules` can silently drift behind it. A newer, stricter TypeScript in the lockfile will reject code your older local `tsc` happily compiled — so a build that's green locally can still fail CI. **After pulling or changing `package-lock.json`, run `npm ci` before trusting a local build** (and before relying on the pre-commit hook). The hook warns when `node_modules` looks stale, but it can't fix it for you.
+
 ### Build/run order & environment gotchas
 
 - **Build `core` before the apps.** Both apps import `@q-ching/core` and resolve it through its `package.json` `exports` → `dist/`. If `dist/` is stale or missing, app typechecks fail or use old types.

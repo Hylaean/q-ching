@@ -20,6 +20,7 @@
     "experiment": "npm run start --workspace @q-ching/exp-oracle-guided",
     "experiment:openai": "npm run start --workspace @q-ching/exp-oracle-guided-openai",
     "build": "npm run build:core && npm run build:web && npm run build --workspace @q-ching/tui && npm run build:mcp",
+    "prepare": "git config core.hooksPath .githooks || true",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "changeset publish"
