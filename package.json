@@ -18,6 +18,7 @@
     "mcp": "npm run start --workspace @hylaean/mcp",
     "build:mcp": "npm run build --workspace @hylaean/mcp",
     "experiment": "npm run start --workspace @hylaean/exp-oracle-guided",
+    "experiment:openai": "npm run start --workspace @hylaean/exp-oracle-guided-openai",
     "build": "npm run build:core && npm run build:web && npm run build --workspace @hylaean/tui && npm run build:mcp",
     "changeset": "changeset",
     "version-packages": "changeset version",

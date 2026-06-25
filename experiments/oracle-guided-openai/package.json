@@ -1,0 +1,20 @@
+{
+  "name": "@q-ching/exp-oracle-guided-openai",
+  "version": "0.1.0",
+  "private": true,
+  "description": "OpenAI edition of the oracle-guided A/B experiment: does consulting the q-ching oracle change how an OpenAI model advises? Uses a key reused from Codex.",
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "build": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@q-ching/core": "*",
+    "openai": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "tsx": "^4.16.0",
+    "typescript": "^5.5.0"
+  }
+}
