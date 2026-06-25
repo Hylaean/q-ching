@@ -24,6 +24,11 @@ interface GatheringProps {
 
 type MotionPermission = 'unknown' | 'unsupported' | 'prompt' | 'granted' | 'denied';
 
+// Movement samples that must be gathered *here* before the cast unlocks. Mirrors
+// GestureEntropy's own 96-sample "full" notion, but counted from a mount-time
+// baseline so it can only be earned by stirring, never inherited.
+const STIR_SAMPLES = 96;
+
 export function Gathering({ gesture, reducedMotion, sources, onCast }: GatheringProps) {
   const { t } = useI18n();
 
@@ -33,7 +38,17 @@ export function Gathering({ gesture, reducedMotion, sources, onCast }: Gathering
     [sources],
   );
 
-  const [fill, setFill] = useState(gesture.fill);
+  // Whatever is already in the pool when we arrive — chiefly the keystroke
+  // timings from the question — must not count as "stirring", or a long question
+  // arrives with the meter full and the querent never has to move. Baseline the
+  // sample count on mount so the meter is earned only by movement made here.
+  // (Those earlier bytes still flow into the seed; they just don't fill the bar.)
+  const stirBaseline = useRef(gesture.count);
+  const stirFill = useCallback(
+    () => Math.min(1, (gesture.count - stirBaseline.current) / STIR_SAMPLES),
+    [gesture],
+  );
+  const [fill, setFill] = useState(stirFill);
   const [statuses, setStatuses] = useState<Partial<Record<QrngSourceName, SourceStatus>>>(() => {
     const init: Partial<Record<QrngSourceName, SourceStatus>> = {};
     for (const s of order) init[s] = 'pending';
@@ -48,8 +63,8 @@ export function Gathering({ gesture, reducedMotion, sources, onCast }: Gathering
   );
 
   const refreshFill = useCallback(() => {
-    setFill(gesture.fill);
-  }, [gesture]);
+    setFill(stirFill());
+  }, [stirFill]);
 
   // Fire the quantum gather once on mount; local CSPRNG always succeeds, so the
   // meter+gather can always complete even when remote beacons are CORS-blocked.
