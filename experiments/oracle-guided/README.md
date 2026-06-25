@@ -6,7 +6,7 @@ or does the model just rationalize whatever it was going to say?
 For each prompt, the harness runs two arms with the **same model and settings**:
 
 - **control** — Claude answers the dilemma directly.
-- **guided** — Claude must first call `consult_oracle` (the real `@hylaean/core`
+- **guided** — Claude must first call `consult_oracle` (the real `@q-ching/core`
   engine, with live quantum entropy), then let the hexagram's Judgment, Image, and
   changing-line texts shape its guidance.
 
@@ -17,7 +17,7 @@ every run is auditable and replayable with `cast({ seed })`.
 
 ```bash
 npm install
-npm run build:core                 # the harness imports @hylaean/core from its dist/
+npm run build:core                 # the harness imports @q-ching/core from its dist/
 export ANTHROPIC_API_KEY=sk-ant-…  # calls the Claude API — billed usage
 npm run experiment                 # runs the default question set
 

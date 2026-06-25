@@ -1,19 +1,19 @@
-# @hylaean/core
+# @q-ching/core
 
 > Platform-agnostic I-Ching engine: entropy pool, QRNG clients, casting math, and the 64 hexagrams.
 
-The dependency-free engine behind [q-ching](https://github.com/Hylaean/q-ching#readme). It relies only on Web Crypto (`crypto.subtle`) and global `fetch`, so the *same* engine runs in the browser, in Node, and in the terminal. It powers the [`@hylaean/tui`](https://www.npmjs.com/package/@hylaean/tui) terminal app and the [`@hylaean/mcp`](https://www.npmjs.com/package/@hylaean/mcp) server.
+The dependency-free engine behind [q-ching](https://github.com/Hylaean/q-ching#readme). It relies only on Web Crypto (`crypto.subtle`) and global `fetch`, so the *same* engine runs in the browser, in Node, and in the terminal. It powers the [`@q-ching/tui`](https://www.npmjs.com/package/@q-ching/tui) terminal app and the [`@q-ching/mcp`](https://www.npmjs.com/package/@q-ching/mcp) server.
 
 ## Install
 
 ```bash
-npm install @hylaean/core
+npm install @q-ching/core
 ```
 
 ## Cast a reading
 
 ```js
-import { cast } from "@hylaean/core";
+import { cast } from "@q-ching/core";
 
 const reading = await cast({ question: "What should I attend to?" });
 console.log(reading.primary.number, reading.primary.name.english);

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Box, Text } from 'ink';
 import Spinner from 'ink-spinner';
-import { gatherEntropy, type QrngResult, type QrngSourceName } from '@hylaean/core';
+import { gatherEntropy, type QrngResult, type QrngSourceName } from '@q-ching/core';
 import { c } from '../theme.js';
 import { Frame, Heading } from '../components/Layout.js';
 

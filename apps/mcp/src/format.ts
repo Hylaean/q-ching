@@ -1,4 +1,4 @@
-import type { Reading } from '@hylaean/core';
+import type { Reading } from '@q-ching/core';
 
 /**
  * Render a Reading as readable text for an LLM tool result: the primary

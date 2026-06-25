@@ -30,7 +30,7 @@ node --test --test-name-pattern="coin distribution" dist/*.test.js
 
 ### Build/run order & environment gotchas
 
-- **Build `core` before the apps.** Both apps import `@hylaean/core` and resolve it through its `package.json` `exports` → `dist/`. If `dist/` is stale or missing, app typechecks fail or use old types.
+- **Build `core` before the apps.** Both apps import `@q-ching/core` and resolve it through its `package.json` `exports` → `dist/`. If `dist/` is stale or missing, app typechecks fail or use old types.
 - **Core tests run from `dist`, not `src`.** Node's type-stripping doesn't remap `.js` import specifiers to `.ts` source, and the engine uses `.js`-suffixed ESM imports throughout. `tsconfig.test.json` compiles the tests alongside the engine into `dist/` so `node --test dist/*.test.js` resolves correctly.
 - **The TUI requires a real terminal** (Ink "raw mode"). It detects non-TTY stdin (pipes, CI, backgrounded) and exits with a message instead of crashing — so it cannot be smoke-tested by piping input. Use a PTY (`script`) if you must drive it headlessly.
 
@@ -38,7 +38,7 @@ node --test --test-name-pattern="coin distribution" dist/*.test.js
 
 ### The engine is the contract
 
-`packages/core` (`@hylaean/core`) is **dependency-free** and relies only on Web Crypto (`crypto.subtle`) and global `fetch` — both present in browsers and Node ≥20. That's why the *same* engine runs in the browser PWA, in Node, and in the terminal. Everything the apps are allowed to use is the surface re-exported from `src/index.ts`; treat that as a locked public API and update it deliberately when adding capabilities, since both apps depend on it.
+`packages/core` (`@q-ching/core`) is **dependency-free** and relies only on Web Crypto (`crypto.subtle`) and global `fetch` — both present in browsers and Node ≥20. That's why the *same* engine runs in the browser PWA, in Node, and in the terminal. Everything the apps are allowed to use is the surface re-exported from `src/index.ts`; treat that as a locked public API and update it deliberately when adding capabilities, since both apps depend on it.
 
 ### The cast pipeline (spans several core files)
 

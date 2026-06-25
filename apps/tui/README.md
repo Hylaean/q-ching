@@ -1,4 +1,4 @@
-# @hylaean/tui
+# @q-ching/tui
 
 > An I-Ching oracle in your terminal — cast from live quantum entropy and the rhythm of your own typing.
 
@@ -7,7 +7,7 @@
 ## Install
 
 ```bash
-npm install -g @hylaean/tui
+npm install -g @q-ching/tui
 ```
 
 ## Use
@@ -20,7 +20,7 @@ Requires a real interactive terminal (it uses raw-mode key input) and Node ≥ 2
 
 ## How it works
 
-This is a thin client over [`@hylaean/core`](https://www.npmjs.com/package/@hylaean/core), the dependency-free engine that does the entropy mixing and casting math. See the [project README](https://github.com/Hylaean/q-ching#readme) for the full story.
+This is a thin client over [`@q-ching/core`](https://www.npmjs.com/package/@q-ching/core), the dependency-free engine that does the entropy mixing and casting math. See the [project README](https://github.com/Hylaean/q-ching#readme) for the full story.
 
 ## License
 

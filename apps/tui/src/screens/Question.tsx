@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Box, Text } from 'ink';
 import TextInput from 'ink-text-input';
-import type { GestureEntropy } from '@hylaean/core';
+import type { GestureEntropy } from '@q-ching/core';
 import { c } from '../theme.js';
 import { Frame, Heading, Hints, Prose } from '../components/Layout.js';
 

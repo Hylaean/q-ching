@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Text, useInput } from 'ink';
-import type { CastMethod } from '@hylaean/core';
+import type { CastMethod } from '@q-ching/core';
 import { c } from '../theme.js';
 import { Frame, Heading, Hints } from '../components/Layout.js';
 

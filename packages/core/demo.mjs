@@ -1,6 +1,6 @@
 // End-to-end smoke: cast a real reading using live quantum entropy (NIST beacon,
 // which works in Node since there's no CORS) mixed with simulated gesture bytes.
-import { cast, gatherEntropy, GestureEntropy, HEXAGRAMS } from '@hylaean/core';
+import { cast, gatherEntropy, GestureEntropy, HEXAGRAMS } from '@q-ching/core';
 
 console.log(`engine loaded: ${HEXAGRAMS.length} hexagrams\n`);
 

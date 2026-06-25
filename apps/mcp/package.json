@@ -1,5 +1,5 @@
 {
-  "name": "@hylaean/mcp",
+  "name": "@q-ching/mcp",
   "version": "0.1.0",
   "description": "An MCP server that lets any AI assistant consult the q-ching I-Ching oracle as a tool.",
   "type": "module",
@@ -39,7 +39,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@hylaean/core": "^0.1.0",
+    "@q-ching/core": "^0.1.0",
     "@modelcontextprotocol/sdk": "^1.29.0",
     "zod": "^4.4.3"
   },

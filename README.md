@@ -38,7 +38,7 @@ powers three faces: a browser PWA, a phone, and a terminal.
 - **Reproducible, shareable seeds** — each cast exposes the exact seed that produced it; `cast({ seed })` reproduces it perfectly. Readings are auditable and shareable.
 - **The full text** — all 64 hexagrams with judgment, image, a one-line gloss, and six line texts. Original prose, faithful to the classic meaning (no copyrighted translation).
 - **Beautiful by intent** — an ink-wash aesthetic, slow eased animations, a luminous ink trail that follows your hand, and full `prefers-reduced-motion` support.
-- **Runs everywhere from one engine** — `@hylaean/core` is dependency-free and uses only Web Crypto + `fetch`.
+- **Runs everywhere from one engine** — `@q-ching/core` is dependency-free and uses only Web Crypto + `fetch`.
 
 ## 🚀 Quick start
 
@@ -66,14 +66,14 @@ Both apps share the same arc:
 
 ## 🧭 The surfaces
 
-One engine, many faces — every app and tool is a thin client over `@hylaean/core`.
+One engine, many faces — every app and tool is a thin client over `@q-ching/core`.
 
 | | |
 |---|---|
-| **`packages/core`** | `@hylaean/core` — the engine. Entropy pool, QRNG clients, casting math, the 64 hexagrams. No dependencies; runs in browser and Node alike. |
+| **`packages/core`** | `@q-ching/core` — the engine. Entropy pool, QRNG clients, casting math, the 64 hexagrams. No dependencies; runs in browser and Node alike. |
 | **`apps/web`** | React + Vite + Framer Motion **PWA**. Captures mouse, touch, and device-motion entropy. Installable; works on laptop and mobile. Deploys to **[qching.hylaean.com](https://qching.hylaean.com)** via GitHub Pages. |
 | **`apps/tui`** | An **Ink** terminal app. Captures keystroke-timing entropy and — with no browser CORS in the way — pulls the live NIST quantum beacon directly. |
-| **`apps/mcp`** | `@hylaean/mcp` — an **MCP server** exposing the oracle as a `cast_reading` tool, so Claude Desktop, Claude Code, and other agents can consult it. Live quantum entropy, like the TUI. |
+| **`apps/mcp`** | `@q-ching/mcp` — an **MCP server** exposing the oracle as a `cast_reading` tool, so Claude Desktop, Claude Code, and other agents can consult it. Live quantum entropy, like the TUI. |
 | **`experiments/oracle-guided`** | An A/B harness: does consulting the oracle actually change how an LLM advises? Guided arm vs. control, with every reading's seed logged for replay. |
 
 ## 🤖 Consult the oracle from your agent (MCP)

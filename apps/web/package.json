@@ -1,5 +1,5 @@
 {
-  "name": "@hylaean/web",
+  "name": "@q-ching/web",
   "version": "0.1.0",
   "private": true,
   "description": "q-ching — a beautiful cross-platform PWA oracle cast from quantum noise and the motion of your hand.",
@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@hylaean/core": "*",
+    "@q-ching/core": "*",
     "framer-motion": "^11.3.19",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"

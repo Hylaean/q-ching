@@ -7,5 +7,5 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["@hylaean/web", "@hylaean/exp-oracle-guided", "@hylaean/exp-oracle-guided-openai"]
+  "ignore": ["@q-ching/web", "@q-ching/exp-oracle-guided", "@q-ching/exp-oracle-guided-openai"]
 }

@@ -104,10 +104,10 @@ hexagram, changing lines, and transform). The **LLM prose** is stochastic and wi
 on re-run; only the oracle is deterministic when seeded.
 
 ```bash
-npm run build:core && npm run build --workspace @hylaean/mcp
+npm run build:core && npm run build --workspace @q-ching/mcp
 Q="I have a stable job I am good at but no longer excited by, and an offer from a tiny startup that thrills me but might fail. How should I think about whether to leave?"
-npm run start --workspace @hylaean/exp-oracle-guided-openai -- --codex     "$Q"
-npm run start --workspace @hylaean/exp-oracle-guided-openai -- --anthropic "$Q"
+npm run start --workspace @q-ching/exp-oracle-guided-openai -- --codex     "$Q"
+npm run start --workspace @q-ching/exp-oracle-guided-openai -- --anthropic "$Q"
 ```
 
 Full transcripts land in `results/<timestamp>.{json,md}` (git-ignored).

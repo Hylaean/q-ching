@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef } from 'react';
-import type { GestureEntropy } from '@hylaean/core';
+import type { GestureEntropy } from '@q-ching/core';
 
 interface InkCanvasProps {
   /** Live gesture accumulator; every pointer move is pushed here. */

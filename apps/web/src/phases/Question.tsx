@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
-import type { CastMethod, GestureEntropy, QrngSourceName } from '@hylaean/core';
+import type { CastMethod, GestureEntropy, QrngSourceName } from '@q-ching/core';
 import { useI18n } from '../i18n';
 import styles from './Question.module.css';
 

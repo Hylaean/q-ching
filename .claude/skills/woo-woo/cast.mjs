@@ -2,8 +2,8 @@
 /**
  * Fallback caster for the woo-woo skill.
  *
- * Casts a reading from @hylaean/core and prints it, for when the q-ching MCP
- * server isn't connected. Run from the repo root so `@hylaean/core` resolves
+ * Casts a reading from @q-ching/core and prints it, for when the q-ching MCP
+ * server isn't connected. Run from the repo root so `@q-ching/core` resolves
  * via the workspace node_modules:
  *
  *   node .claude/skills/woo-woo/cast.mjs "should I ship this?"
@@ -12,7 +12,7 @@
  *
  * Requires `npm run build:core` first (it imports the engine's dist/).
  */
-import { cast } from '@hylaean/core';
+import { cast } from '@q-ching/core';
 
 const args = process.argv.slice(2);
 const local = args.includes('--local');

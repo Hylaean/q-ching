@@ -1,10 +1,10 @@
-# @hylaean/mcp
+# @q-ching/mcp
 
 An [MCP](https://modelcontextprotocol.io) server that exposes the **q-ching** I-Ching
 oracle as a tool, so any MCP client — Claude Desktop, Claude Code, or another agent —
 can cast a reading and be guided by it.
 
-It runs the dependency-free `@hylaean/core` engine directly. Because it's a Node
+It runs the dependency-free `@q-ching/core` engine directly. Because it's a Node
 process with no browser CORS in the way, it reaches the **live quantum sources** the
 same way the terminal app does.
 
@@ -28,7 +28,7 @@ texts, the hexagram it transforms into, and the **reproducible seed**.
 Install from npm:
 
 ```bash
-npm install -g @hylaean/mcp
+npm install -g @q-ching/mcp
 q-ching-mcp               # starts the server on stdio
 ```
 
@@ -36,7 +36,7 @@ Or run from a clone of the repo:
 
 ```bash
 npm install
-npm run build:core        # the server imports @hylaean/core from its dist/
+npm run build:core        # the server imports @q-ching/core from its dist/
 npm run mcp               # starts the server on stdio
 ```
 
@@ -50,13 +50,13 @@ Desktop, add to `claude_desktop_config.json`:
   "mcpServers": {
     "q-ching": {
       "command": "npx",
-      "args": ["-y", "@hylaean/mcp"]
+      "args": ["-y", "@q-ching/mcp"]
     }
   }
 }
 ```
 
-For Claude Code: `claude mcp add q-ching -- npx -y @hylaean/mcp`.
+For Claude Code: `claude mcp add q-ching -- npx -y @q-ching/mcp`.
 
 Running from a clone instead? Build once (`npm run build:core && npm run build:mcp`)
 and point the client at `node /absolute/path/to/q-ching/apps/mcp/dist/index.js`.

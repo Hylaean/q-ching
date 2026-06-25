@@ -1,5 +1,5 @@
 {
-  "name": "@hylaean/core",
+  "name": "@q-ching/core",
   "version": "0.1.0",
   "description": "Platform-agnostic I-Ching engine: entropy pool, QRNG clients, casting math, and the 64 hexagrams.",
   "type": "module",

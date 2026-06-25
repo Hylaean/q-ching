@@ -3,7 +3,7 @@
  * localStorage. We deliberately store only what's needed to revisit a reading
  * (and reproduce it from its seed) — never the full hexagram prose.
  */
-import type { Reading } from '@hylaean/core';
+import type { Reading } from '@q-ching/core';
 
 export interface JournalEntry {
   id: string;

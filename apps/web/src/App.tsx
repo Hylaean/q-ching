@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useReducer, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { GestureEntropy, cast, type QrngResult, type Reading } from '@hylaean/core';
+import { GestureEntropy, cast, type QrngResult, type Reading } from '@q-ching/core';
 
 import { initialRitualState, ritualReducer } from './ritual/machine';
 import { useReducedMotion } from './lib/hooks';
