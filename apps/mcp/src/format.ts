@@ -5,7 +5,11 @@ import type { Reading } from '@hylaean/core';
  * hexagram with its Judgment and Image, the changing lines and their texts,
  * the hexagram it transforms into, and the reproducible seed.
  */
-export function formatReading(reading: Reading, question?: string): string {
+export function formatReading(
+  reading: Reading,
+  question?: string,
+  opts?: { contextFolded?: boolean },
+): string {
   const p = reading.primary;
   const out: string[] = [];
 
@@ -40,6 +44,10 @@ export function formatReading(reading: Reading, question?: string): string {
     out.push(`Becoming: ${t.symbol} ${t.number}. ${t.name.chinese} (${t.name.pinyin}) — ${t.name.english}`);
   }
 
-  out.push('', `Seed: ${reading.seed}`);
+  out.push('');
+  if (opts?.contextFolded) {
+    out.push('(Your conversation context was folded into this cast as the agent gesture.)');
+  }
+  out.push(`Seed: ${reading.seed}`);
   return out.join('\n');
 }

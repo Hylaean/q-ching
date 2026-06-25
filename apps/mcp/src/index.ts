@@ -41,16 +41,32 @@ server.registerTool(
         .boolean()
         .optional()
         .describe('Fold in live quantum entropy (default true). Set false to skip the network calls and use local entropy only.'),
+      contextHash: z
+        .string()
+        .optional()
+        .describe(
+          "Your 'gesture': a hash or digest of your current conversation context, folded into the " +
+            'entropy pool as the calling agent’s own contribution to the cast — the analog of a human ' +
+            'querent stirring with their hand while holding the question in mind. Send e.g. a hex digest of ' +
+            'your recent context, a summary string, or a nonce; it is hashed together with every other source, ' +
+            'so its form does not matter. Unlike a human gesture it carries little true randomness (the quantum ' +
+            'and local CSPRNG sources do that), but a fresh agent context is genuinely hard to reproduce, and ' +
+            'this is how you participate in the reading rather than merely observe it. Ignored when `seed` is set ' +
+            '(a replay is deterministic).',
+        ),
     },
   },
-  async ({ question, method, seed, quantum }) => {
+  async ({ question, method, seed, quantum, contextHash }) => {
+    // A seed reproduces a cast deterministically, so the live sources (quantum,
+    // and the agent's own context gesture) are skipped when one is supplied.
+    const contextFolded = !seed && !!contextHash;
     const reading = await cast({
       method,
       seed,
-      // A seed reproduces a cast deterministically, so skip the live gather then.
+      userEntropy: contextFolded ? new TextEncoder().encode(contextHash) : undefined,
       qrng: seed ? undefined : quantum === false ? undefined : true,
     });
-    return { content: [{ type: 'text', text: formatReading(reading, question) }] };
+    return { content: [{ type: 'text', text: formatReading(reading, question, { contextFolded }) }] };
   },
 );
 

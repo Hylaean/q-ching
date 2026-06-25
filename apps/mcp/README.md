@@ -18,6 +18,7 @@ same way the terminal app does.
 | `method` | `"coin"` \| `"yarrow"`? | `coin` (default) or the traditional `yarrow` (changing lines rarer). |
 | `seed` | string? | Reproduce a prior reading exactly from its hex seed. |
 | `quantum` | boolean? | Fold in live quantum entropy (default `true`). |
+| `contextHash` | string? | The agent's "gesture" — a hash/digest of its current conversation context, folded into the entropy pool as the caller's own contribution. Hashed with every other source, so its form is free. Ignored when `seed` is set. |
 
 Returns the primary hexagram (Judgment, Image, gloss), the changing lines and their
 texts, the hexagram it transforms into, and the **reproducible seed**.
