@@ -36,6 +36,7 @@ interface QuestionResult {
   question: string;
   control: ArmResult;
   guided: GuidedResult;
+  error?: string;
 }
 
 /** Build the advisor for the selected auth mode. Throws with actionable text on bad creds. */
@@ -122,29 +123,50 @@ async function main(): Promise<void> {
   const startedAt = new Date().toISOString();
   const results: QuestionResult[] = [];
 
-  for (const [i, question] of questions.entries()) {
-    console.error(`[${i + 1}/${questions.length}] ${question.slice(0, 72)}…`);
-    console.error('  control arm…');
-    const control = await advisor.control(question);
-    console.error('  guided arm (consulting the oracle)…');
-    const guided = await advisor.guided(question);
-    if (guided.reading) {
-      const becoming = guided.reading.becoming ? ` → ${guided.reading.becoming}` : '';
-      console.error(`  cast ${guided.reading.primary}${becoming}  (seed ${guided.reading.seed.slice(0, 12)}…)`);
-    }
-    results.push({ question, control, guided });
-  }
-
+  // Output dir: QCHING_OUT_DIR (e.g. a committed traces folder) else results/ (git-ignored).
   const here = path.dirname(fileURLToPath(import.meta.url));
-  const outDir = path.join(here, '..', 'results');
+  const outDir = process.env.QCHING_OUT_DIR
+    ? path.resolve(process.env.QCHING_OUT_DIR)
+    : path.join(here, '..', 'results');
   await mkdir(outDir, { recursive: true });
   const stamp = startedAt.replace(/[:.]/g, '-');
-  const jsonPath = path.join(outDir, `${stamp}.json`);
-  const mdPath = path.join(outDir, `${stamp}.md`);
-  await writeFile(jsonPath, JSON.stringify({ mode, startedAt, results }, null, 2));
-  await writeFile(mdPath, toMarkdown(results, mode, startedAt));
+  const slug = mode.replace(/[^a-z0-9]+/gi, '-');
+  const jsonPath = path.join(outDir, `${stamp}-${slug}.json`);
+  const mdPath = path.join(outDir, `${stamp}-${slug}.md`);
 
-  console.error(`\nDone. ${results.length} question(s).`);
+  // Persist after every question so a long, expensive run never loses completed work.
+  const flush = async () => {
+    await writeFile(jsonPath, JSON.stringify({ mode, startedAt, results }, null, 2));
+    await writeFile(mdPath, toMarkdown(results, mode, startedAt));
+  };
+
+  for (const [i, question] of questions.entries()) {
+    console.error(`[${i + 1}/${questions.length}] ${question.slice(0, 72)}…`);
+    try {
+      console.error('  control arm…');
+      const control = await advisor.control(question);
+      console.error('  guided arm (consulting the oracle)…');
+      const guided = await advisor.guided(question);
+      if (guided.reading) {
+        const becoming = guided.reading.becoming ? ` → ${guided.reading.becoming}` : '';
+        console.error(`  cast ${guided.reading.primary}${becoming}  (seed ${guided.reading.seed.slice(0, 12)}…)`);
+      }
+      results.push({ question, control, guided });
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      console.error(`  ! error on question ${i + 1}: ${message}`);
+      results.push({
+        question,
+        control: { answer: '', stopReason: 'error' },
+        guided: { answer: '', stopReason: 'error', reading: null },
+        error: message,
+      });
+    }
+    await flush();
+  }
+
+  const errored = results.filter((r) => r.error).length;
+  console.error(`\nDone. ${results.length} question(s)${errored ? `, ${errored} errored` : ''}.`);
   console.error(`  ${jsonPath}`);
   console.error(`  ${mdPath}`);
 }
