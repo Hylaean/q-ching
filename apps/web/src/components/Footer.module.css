@@ -3,10 +3,37 @@
   right: max(1.1rem, env(safe-area-inset-right));
   bottom: max(0.9rem, env(safe-area-inset-bottom));
   z-index: 20;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5em;
   font-family: var(--sans);
   font-size: 0.62rem;
   letter-spacing: 0.16em;
-  color: var(--paper-ghost);
+  /* The copyright is decorative; only the About link should catch clicks. */
   pointer-events: none;
   user-select: none;
+}
+
+.about {
+  pointer-events: auto;
+  font-family: var(--sans);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--paper-faint);
+  transition: color 0.4s var(--ease-soft);
+  -webkit-tap-highlight-color: transparent;
+}
+.about:hover,
+.about:focus-visible {
+  color: var(--paper);
+  outline: none;
+}
+
+.sep {
+  color: var(--paper-ghost);
+}
+
+.copy {
+  color: var(--paper-ghost);
 }

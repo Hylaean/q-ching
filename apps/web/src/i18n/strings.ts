@@ -84,6 +84,9 @@ const en: Dict = {
   'journal.revisit': 'Revisit this reading',
 
   'lang.label': 'Language',
+
+  'nav.about': 'About',
+  'common.close': 'Close',
 };
 
 const fr: Dict = {
@@ -160,6 +163,9 @@ const fr: Dict = {
   'journal.revisit': 'Revoir ce tirage',
 
   'lang.label': 'Langue',
+
+  'nav.about': 'À propos',
+  'common.close': 'Fermer',
 };
 
 export const STRINGS: Record<Locale, Dict> = { en, fr };

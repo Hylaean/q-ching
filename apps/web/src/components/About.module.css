@@ -1,0 +1,129 @@
+.title {
+  font-family: var(--serif);
+  font-size: clamp(2.6rem, 9vw, 4.2rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: var(--paper);
+  margin-top: 0.5rem;
+}
+.dash {
+  color: var(--cinnabar);
+  margin: 0 0.02em;
+}
+
+.lead {
+  font-family: var(--serif);
+  font-size: clamp(1.15rem, 2.4vw, 1.4rem);
+  line-height: 1.62;
+  color: var(--paper-dim);
+  margin-top: 1.6rem;
+  max-width: 36rem;
+}
+
+.surfacesLabel {
+  display: block;
+  text-align: center;
+  margin: 0.4rem 0 0.2rem;
+}
+
+.surfaces {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  margin-top: 1.4rem;
+}
+
+.surface {
+  border-top: 1px solid var(--paper-ghost);
+  padding-top: 1.6rem;
+}
+
+.surfaceLabel {
+  font-family: var(--sans);
+  font-size: 0.66rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.surfaceTitle {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 3.4vw, 2rem);
+  font-weight: 500;
+  font-style: italic;
+  color: var(--paper);
+  margin-top: 0.5rem;
+}
+
+.surfaceBody {
+  font-size: 1.02rem;
+  line-height: 1.72;
+  color: var(--paper-dim);
+  margin-top: 0.8rem;
+  max-width: 38rem;
+}
+
+.surfaceBody code,
+.surface code {
+  font-family: var(--mono);
+  font-size: 0.85em;
+  color: var(--gold);
+}
+
+.analysisButton {
+  margin-top: 1.4rem;
+}
+
+.note {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  font-style: italic;
+  color: var(--paper-faint);
+  margin-top: 2.6rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--paper-ghost);
+  max-width: 38rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.6rem 2rem;
+  margin-top: 2.2rem;
+}
+
+.source {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  color: var(--gold);
+  border-bottom: 1px solid var(--gold-soft);
+  transition:
+    color 0.35s var(--ease-soft),
+    border-color 0.35s var(--ease-soft);
+}
+.source:hover {
+  color: var(--paper);
+  border-color: var(--gold);
+}
+
+.live {
+  font-family: var(--sans);
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+  color: var(--paper-faint);
+  border-bottom: none;
+}
+.live:hover {
+  color: var(--paper-dim);
+}
+
+.copy {
+  font-family: var(--sans);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  color: var(--paper-ghost);
+  margin-top: 3rem;
+}

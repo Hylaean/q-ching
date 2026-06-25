@@ -20,6 +20,8 @@ import { Journal } from './components/Journal';
 import { SmokeField } from './components/SmokeField';
 import { LanguageSelector } from './components/LanguageSelector';
 import { Footer } from './components/Footer';
+import { About } from './components/About';
+import { Analysis } from './components/Analysis';
 
 const phaseFade = {
   initial: { opacity: 0 },
@@ -40,6 +42,9 @@ export default function App() {
   const qrngRef = useRef<QrngResult[]>([]);
   // Snapshot of the gesture bytes taken at the moment of casting.
   const userEntropyRef = useRef<Uint8Array>(new Uint8Array());
+
+  // Static "pages" rendered over the ritual (footer → About → Analysis).
+  const [overlay, setOverlay] = useState<'about' | 'analysis' | null>(null);
 
   // Journal
   const [journalOpen, setJournalOpen] = useState(false);
@@ -166,7 +171,19 @@ export default function App() {
       />
 
       <LanguageSelector />
-      <Footer />
+      <Footer onAbout={() => setOverlay('about')} />
+
+      <About
+        open={overlay === 'about'}
+        reducedMotion={reducedMotion}
+        onClose={() => setOverlay(null)}
+        onOpenAnalysis={() => setOverlay('analysis')}
+      />
+      <Analysis
+        open={overlay === 'analysis'}
+        reducedMotion={reducedMotion}
+        onClose={() => setOverlay('about')}
+      />
 
       <Journal
         open={journalOpen}
