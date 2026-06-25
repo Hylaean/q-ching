@@ -1,0 +1,25 @@
+{
+  "name": "@q-ching/mcp",
+  "version": "0.1.0",
+  "description": "An MCP server that lets any AI assistant consult the q-ching I-Ching oracle as a tool.",
+  "type": "module",
+  "bin": {
+    "q-ching-mcp": "./dist/index.js"
+  },
+  "files": ["dist", "src"],
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@q-ching/core": "*",
+    "@modelcontextprotocol/sdk": "*",
+    "zod": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "tsx": "^4.16.0",
+    "typescript": "^5.5.0"
+  }
+}
