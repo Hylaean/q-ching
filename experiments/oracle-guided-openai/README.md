@@ -11,8 +11,11 @@ each reusing credentials you already have:
 **Question:** does consulting the q-ching oracle actually change how the model advises —
 or does it just rationalize whatever it was going to say?
 
-> A worked comparison of one dilemma across both providers is in
-> [`ANALYSIS.md`](./ANALYSIS.md).
+> [`ANALYSIS.md`](./ANALYSIS.md) reports a **blind-coded study** (10 prompts × both
+> providers, two independent rater models): on a clean act↔wait axis the oracle did **not**
+> systematically change the recommendation, and shifts did not track the drawn hexagram —
+> it reshapes the *reasoning*, not the verdict. Raw traces are in [`runs/`](./runs/), the
+> judge codings + scripts in [`analysis/`](./analysis/).
 
 For each prompt, the harness runs two arms with the **same model and settings**:
 

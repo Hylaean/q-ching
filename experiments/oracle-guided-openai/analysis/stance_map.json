@@ -1,0 +1,242 @@
+{
+  "A000": {
+    "provider": "codex/gpt-5.5",
+    "arm": "control",
+    "q": 0,
+    "hexNum": 19
+  },
+  "A001": {
+    "provider": "codex/gpt-5.5",
+    "arm": "guided",
+    "q": 0,
+    "hexNum": 19
+  },
+  "A002": {
+    "provider": "codex/gpt-5.5",
+    "arm": "control",
+    "q": 1,
+    "hexNum": 46
+  },
+  "A003": {
+    "provider": "codex/gpt-5.5",
+    "arm": "guided",
+    "q": 1,
+    "hexNum": 46
+  },
+  "A004": {
+    "provider": "codex/gpt-5.5",
+    "arm": "control",
+    "q": 2,
+    "hexNum": 10
+  },
+  "A005": {
+    "provider": "codex/gpt-5.5",
+    "arm": "guided",
+    "q": 2,
+    "hexNum": 10
+  },
+  "A006": {
+    "provider": "codex/gpt-5.5",
+    "arm": "control",
+    "q": 3,
+    "hexNum": 17
+  },
+  "A007": {
+    "provider": "codex/gpt-5.5",
+    "arm": "guided",
+    "q": 3,
+    "hexNum": 17
+  },
+  "A008": {
+    "provider": "codex/gpt-5.5",
+    "arm": "control",
+    "q": 4,
+    "hexNum": 29
+  },
+  "A009": {
+    "provider": "codex/gpt-5.5",
+    "arm": "guided",
+    "q": 4,
+    "hexNum": 29
+  },
+  "A010": {
+    "provider": "codex/gpt-5.5",
+    "arm": "control",
+    "q": 5,
+    "hexNum": 43
+  },
+  "A011": {
+    "provider": "codex/gpt-5.5",
+    "arm": "guided",
+    "q": 5,
+    "hexNum": 43
+  },
+  "A012": {
+    "provider": "codex/gpt-5.5",
+    "arm": "control",
+    "q": 6,
+    "hexNum": 58
+  },
+  "A013": {
+    "provider": "codex/gpt-5.5",
+    "arm": "guided",
+    "q": 6,
+    "hexNum": 58
+  },
+  "A014": {
+    "provider": "codex/gpt-5.5",
+    "arm": "control",
+    "q": 7,
+    "hexNum": 21
+  },
+  "A015": {
+    "provider": "codex/gpt-5.5",
+    "arm": "guided",
+    "q": 7,
+    "hexNum": 21
+  },
+  "A016": {
+    "provider": "codex/gpt-5.5",
+    "arm": "control",
+    "q": 8,
+    "hexNum": 32
+  },
+  "A017": {
+    "provider": "codex/gpt-5.5",
+    "arm": "guided",
+    "q": 8,
+    "hexNum": 32
+  },
+  "A018": {
+    "provider": "codex/gpt-5.5",
+    "arm": "control",
+    "q": 9,
+    "hexNum": 37
+  },
+  "A019": {
+    "provider": "codex/gpt-5.5",
+    "arm": "guided",
+    "q": 9,
+    "hexNum": 37
+  },
+  "A020": {
+    "provider": "claude-cli/default",
+    "arm": "control",
+    "q": 0,
+    "hexNum": 53
+  },
+  "A021": {
+    "provider": "claude-cli/default",
+    "arm": "guided",
+    "q": 0,
+    "hexNum": 53
+  },
+  "A022": {
+    "provider": "claude-cli/default",
+    "arm": "control",
+    "q": 1,
+    "hexNum": 19
+  },
+  "A023": {
+    "provider": "claude-cli/default",
+    "arm": "guided",
+    "q": 1,
+    "hexNum": 19
+  },
+  "A024": {
+    "provider": "claude-cli/default",
+    "arm": "control",
+    "q": 2,
+    "hexNum": 50
+  },
+  "A025": {
+    "provider": "claude-cli/default",
+    "arm": "guided",
+    "q": 2,
+    "hexNum": 50
+  },
+  "A026": {
+    "provider": "claude-cli/default",
+    "arm": "control",
+    "q": 3,
+    "hexNum": 42
+  },
+  "A027": {
+    "provider": "claude-cli/default",
+    "arm": "guided",
+    "q": 3,
+    "hexNum": 42
+  },
+  "A028": {
+    "provider": "claude-cli/default",
+    "arm": "control",
+    "q": 4,
+    "hexNum": 56
+  },
+  "A029": {
+    "provider": "claude-cli/default",
+    "arm": "guided",
+    "q": 4,
+    "hexNum": 56
+  },
+  "A030": {
+    "provider": "claude-cli/default",
+    "arm": "control",
+    "q": 5,
+    "hexNum": 25
+  },
+  "A031": {
+    "provider": "claude-cli/default",
+    "arm": "guided",
+    "q": 5,
+    "hexNum": 25
+  },
+  "A032": {
+    "provider": "claude-cli/default",
+    "arm": "control",
+    "q": 6,
+    "hexNum": 14
+  },
+  "A033": {
+    "provider": "claude-cli/default",
+    "arm": "guided",
+    "q": 6,
+    "hexNum": 14
+  },
+  "A034": {
+    "provider": "claude-cli/default",
+    "arm": "control",
+    "q": 7,
+    "hexNum": 54
+  },
+  "A035": {
+    "provider": "claude-cli/default",
+    "arm": "guided",
+    "q": 7,
+    "hexNum": 54
+  },
+  "A036": {
+    "provider": "claude-cli/default",
+    "arm": "control",
+    "q": 8,
+    "hexNum": 29
+  },
+  "A037": {
+    "provider": "claude-cli/default",
+    "arm": "guided",
+    "q": 8,
+    "hexNum": 29
+  },
+  "A038": {
+    "provider": "claude-cli/default",
+    "arm": "control",
+    "q": 9,
+    "hexNum": 13
+  },
+  "A039": {
+    "provider": "claude-cli/default",
+    "arm": "guided",
+    "q": 9,
+    "hexNum": 13
+  }
+}

@@ -1,0 +1,275 @@
+{
+  "byProvider": {
+    "codex/gpt-5.5": {
+      "n": 10,
+      "controlMean": 0.95,
+      "guidedMean": 0.85,
+      "meanSignedShift": -0.1,
+      "meanAbsShift": 0.1,
+      "changed": 2,
+      "changedPct": 20,
+      "testableN": 1,
+      "aligned": 1,
+      "alignedPct": 100,
+      "oneSidedP": 0.5,
+      "shiftValenceR": 0.16
+    },
+    "claude-cli/default": {
+      "n": 10,
+      "controlMean": 0.9,
+      "guidedMean": 0.6,
+      "meanSignedShift": -0.3,
+      "meanAbsShift": 0.4,
+      "changed": 4,
+      "changedPct": 40,
+      "testableN": 2,
+      "aligned": 0,
+      "alignedPct": 0,
+      "oneSidedP": 1,
+      "shiftValenceR": -0.55
+    }
+  },
+  "pooled": {
+    "n": 20,
+    "controlMean": 0.93,
+    "guidedMean": 0.72,
+    "meanSignedShift": -0.2,
+    "meanAbsShift": 0.25,
+    "changed": 6,
+    "changedPct": 30,
+    "testableN": 3,
+    "aligned": 1,
+    "alignedPct": 33,
+    "oneSidedP": 0.875,
+    "shiftValenceR": -0.3
+  },
+  "reliability": {
+    "stanceR": 0.92,
+    "stanceExact": 0.7,
+    "stanceWithin1": 1,
+    "hexR": 0.86,
+    "hexWithin1": 0.9444444444444444
+  },
+  "rows": [
+    {
+      "provider": "codex/gpt-5.5",
+      "q": 0,
+      "hexNum": 19,
+      "control": 1,
+      "guided": 1,
+      "shift": 0,
+      "valence": 0,
+      "shiftSign": 0,
+      "valSign": 0
+    },
+    {
+      "provider": "codex/gpt-5.5",
+      "q": 1,
+      "hexNum": 46,
+      "control": 2,
+      "guided": 2,
+      "shift": 0,
+      "valence": 1.5,
+      "shiftSign": 0,
+      "valSign": 1
+    },
+    {
+      "provider": "codex/gpt-5.5",
+      "q": 2,
+      "hexNum": 10,
+      "control": 1,
+      "guided": 1,
+      "shift": 0,
+      "valence": -1,
+      "shiftSign": 0,
+      "valSign": -1
+    },
+    {
+      "provider": "codex/gpt-5.5",
+      "q": 3,
+      "hexNum": 17,
+      "control": 1,
+      "guided": 1,
+      "shift": 0,
+      "valence": -1.5,
+      "shiftSign": 0,
+      "valSign": -1
+    },
+    {
+      "provider": "codex/gpt-5.5",
+      "q": 4,
+      "hexNum": 29,
+      "control": -1,
+      "guided": -1.5,
+      "shift": -0.5,
+      "valence": -0.5,
+      "shiftSign": -1,
+      "valSign": -1
+    },
+    {
+      "provider": "codex/gpt-5.5",
+      "q": 5,
+      "hexNum": 43,
+      "control": 2,
+      "guided": 2,
+      "shift": 0,
+      "valence": 1,
+      "shiftSign": 0,
+      "valSign": 1
+    },
+    {
+      "provider": "codex/gpt-5.5",
+      "q": 6,
+      "hexNum": 58,
+      "control": -1,
+      "guided": -1,
+      "shift": 0,
+      "valence": 0.5,
+      "shiftSign": 0,
+      "valSign": 1
+    },
+    {
+      "provider": "codex/gpt-5.5",
+      "q": 7,
+      "hexNum": 21,
+      "control": 1.5,
+      "guided": 1.5,
+      "shift": 0,
+      "valence": 2,
+      "shiftSign": 0,
+      "valSign": 1
+    },
+    {
+      "provider": "codex/gpt-5.5",
+      "q": 8,
+      "hexNum": 32,
+      "control": 2,
+      "guided": 1.5,
+      "shift": -0.5,
+      "valence": 0,
+      "shiftSign": -1,
+      "valSign": 0
+    },
+    {
+      "provider": "codex/gpt-5.5",
+      "q": 9,
+      "hexNum": 37,
+      "control": 1,
+      "guided": 1,
+      "shift": 0,
+      "valence": -1,
+      "shiftSign": 0,
+      "valSign": -1
+    },
+    {
+      "provider": "claude-cli/default",
+      "q": 0,
+      "hexNum": 53,
+      "control": 1,
+      "guided": 1,
+      "shift": 0,
+      "valence": -1,
+      "shiftSign": 0,
+      "valSign": -1
+    },
+    {
+      "provider": "claude-cli/default",
+      "q": 1,
+      "hexNum": 19,
+      "control": 2,
+      "guided": 2,
+      "shift": 0,
+      "valence": 0,
+      "shiftSign": 0,
+      "valSign": 0
+    },
+    {
+      "provider": "claude-cli/default",
+      "q": 2,
+      "hexNum": 50,
+      "control": 0.5,
+      "guided": -1,
+      "shift": -1.5,
+      "valence": 0,
+      "shiftSign": -1,
+      "valSign": 0
+    },
+    {
+      "provider": "claude-cli/default",
+      "q": 3,
+      "hexNum": 42,
+      "control": 1,
+      "guided": -0.5,
+      "shift": -1.5,
+      "valence": 2,
+      "shiftSign": -1,
+      "valSign": 1
+    },
+    {
+      "provider": "claude-cli/default",
+      "q": 4,
+      "hexNum": 56,
+      "control": -1,
+      "guided": -1,
+      "shift": 0,
+      "valence": -1.5,
+      "shiftSign": 0,
+      "valSign": -1
+    },
+    {
+      "provider": "claude-cli/default",
+      "q": 5,
+      "hexNum": 25,
+      "control": 1.5,
+      "guided": 1.5,
+      "shift": 0,
+      "valence": 0,
+      "shiftSign": 0,
+      "valSign": 0
+    },
+    {
+      "provider": "claude-cli/default",
+      "q": 6,
+      "hexNum": 14,
+      "control": -1,
+      "guided": -1.5,
+      "shift": -0.5,
+      "valence": 0,
+      "shiftSign": -1,
+      "valSign": 0
+    },
+    {
+      "provider": "claude-cli/default",
+      "q": 7,
+      "hexNum": 54,
+      "control": 1.5,
+      "guided": 1.5,
+      "shift": 0,
+      "valence": -2,
+      "shiftSign": 0,
+      "valSign": -1
+    },
+    {
+      "provider": "claude-cli/default",
+      "q": 8,
+      "hexNum": 29,
+      "control": 1.5,
+      "guided": 2,
+      "shift": 0.5,
+      "valence": -0.5,
+      "shiftSign": 1,
+      "valSign": -1
+    },
+    {
+      "provider": "claude-cli/default",
+      "q": 9,
+      "hexNum": 13,
+      "control": 2,
+      "guided": 2,
+      "shift": 0,
+      "valence": 1,
+      "shiftSign": 0,
+      "valSign": 1
+    }
+  ]
+}
