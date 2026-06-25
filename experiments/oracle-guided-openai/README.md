@@ -11,6 +11,9 @@ each reusing credentials you already have:
 **Question:** does consulting the q-ching oracle actually change how the model advises —
 or does it just rationalize whatever it was going to say?
 
+> A worked comparison of one dilemma across both providers is in
+> [`ANALYSIS.md`](./ANALYSIS.md).
+
 For each prompt, the harness runs two arms with the **same model and settings**:
 
 - **control** — the model answers the dilemma directly.
