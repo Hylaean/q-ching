@@ -1,0 +1,29 @@
+name: Dependabot auto-merge
+
+# Turns on GitHub's native auto-merge for every Dependabot PR (all update types,
+# including major). Auto-merge waits for the required status checks (the CI
+# workflow) to pass before merging, so a bump that breaks the build or tests is
+# never merged.
+#
+# Requires two repo settings, which can't live in a file:
+#   1. Settings → General → Pull Requests → "Allow auto-merge" = on.
+#   2. A branch protection rule / ruleset on `main` that requires the CI check
+#      ("CI / build-test"). Without this, auto-merge merges as soon as the PR is
+#      mergeable — i.e. with no gate.
+
+on: pull_request
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-merge:
+    if: github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Enable auto-merge (squash)
+        run: gh pr merge --auto --squash "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

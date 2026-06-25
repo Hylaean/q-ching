@@ -1,0 +1,31 @@
+# Dependabot keeps dependencies current by opening grouped PRs on a weekly
+# cadence. Updates are batched (not one PR per package) so review stays
+# manageable; minor+patch are grouped apart from major so a breaking major can't
+# hold back the safe batch. The companion workflow
+# (.github/workflows/dependabot-auto-merge.yml) turns on auto-merge, and the CI
+# workflow (.github/workflows/ci.yml) is the green gate it waits on.
+version: 2
+updates:
+  # JavaScript / npm — one entry covers the whole npm workspace: the root
+  # lockfile plus every packages/*, apps/*, and experiments/* manifest.
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    groups:
+      npm-minor-patch:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
+      npm-major:
+        patterns: ["*"]
+        update-types: ["major"]
+
+  # The GitHub Actions pinned in .github/workflows.
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns: ["*"]

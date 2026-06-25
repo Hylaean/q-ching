@@ -1,0 +1,34 @@
+name: CI
+
+# The green gate for pull requests: build every workspace and run the core test
+# suite. Dependabot auto-merge waits for this check to pass (once it's required
+# on main via branch protection), so a dependency bump can't be merged — and so
+# can't auto-deploy — unless the build and tests are clean.
+
+on:
+  pull_request:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      # The rollup native binary (@rollup/rollup-linux-x64-gnu) is pinned as an
+      # optionalDependency so npm ci installs it here, despite npm's cross-OS
+      # optional-deps bug (npm/cli#4828).
+      - run: npm ci
+
+      # Builds in order: core → web → tui → mcp.
+      - run: npm run build
+
+      - run: npm run test:core
