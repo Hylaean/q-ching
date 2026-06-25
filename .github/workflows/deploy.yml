@@ -1,0 +1,55 @@
+name: Deploy web PWA
+
+# Publishes apps/web to GitHub Pages (served at https://qching.hylaean.com).
+# The custom domain keeps Vite's base at "/", so the manifest, service worker,
+# and icon paths need no rewriting.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+# Permissions the deploy-pages action needs: read the repo, write the Pages
+# deployment, and mint the OIDC token it verifies against.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deploy at a time; cancel an in-flight run if a newer commit lands.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      # Build the engine first — apps/web resolves @q-ching/core from its dist/.
+      - run: npm run build:core
+      - run: npm run build:web
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/web/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
