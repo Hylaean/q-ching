@@ -6,7 +6,9 @@ import { LineStack, bitsToLines } from '../components/LineStack';
 import { useI18n } from '../i18n';
 import { hexText } from '../i18n/hexText';
 import { NOW_READINGS, transitionNote } from '../content/now';
+import { NOW_READINGS_FR, transitionNoteFr } from '../content/now.fr';
 import { NOW_LINES } from '../content/now-lines';
+import { NOW_LINES_FR } from '../content/now-lines.fr';
 import styles from './Reading.module.css';
 
 interface ReadingProps {
@@ -34,9 +36,12 @@ export function Reading({ reading, question, reducedMotion, onAgain }: ReadingPr
   const { primary, transformed, changingPositions, lines, seed, method } = reading;
   const primaryText = hexText(primary, locale);
   const transformedText = transformed ? hexText(transformed, locale) : null;
-  const now = NOW_READINGS[primary.number];
-  const nowBecoming = transformed ? NOW_READINGS[transformed.number] : undefined;
-  const nowLines = NOW_LINES[primary.number];
+  const fr = locale === 'fr';
+  const now = (fr ? NOW_READINGS_FR[primary.number] : undefined) ?? NOW_READINGS[primary.number];
+  const nowBecoming = transformed
+    ? (fr ? NOW_READINGS_FR[transformed.number] : undefined) ?? NOW_READINGS[transformed.number]
+    : undefined;
+  const nowLines = (fr ? NOW_LINES_FR[primary.number] : undefined) ?? NOW_LINES[primary.number];
   const [copied, setCopied] = useState(false);
   const copyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -140,7 +145,9 @@ export function Reading({ reading, question, reducedMotion, onAgain }: ReadingPr
               <span className="rule__diamond" />
             </div>
             <p className={styles.becomingLabel}>{t('reading.becoming')}</p>
-            <p className={styles.transition}>{transitionNote(primaryText.name, transformedText.name)}</p>
+            <p className={styles.transition}>
+              {(fr ? transitionNoteFr : transitionNote)(primaryText.name, transformedText.name)}
+            </p>
             <div className={styles.glyphRow}>
               <HexagramGlyph symbol={transformed.symbol} size="medium" label={transformedText.name} />
               <div className={styles.lineCol}>
