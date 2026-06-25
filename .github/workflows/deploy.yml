@@ -41,7 +41,11 @@ jobs:
       - run: npm run build:core
       - run: npm run build:web
 
+      # enablement:true turns on GitHub Pages (build type = GitHub Actions) via the API
+      # on first run, so no manual Settings → Pages toggle is needed.
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - uses: actions/upload-pages-artifact@v3
         with:
