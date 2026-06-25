@@ -1,11 +1,16 @@
-import React, { useCallback, useRef, useState } from 'react';
-import { useApp, useInput } from 'ink';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Box, Text, useApp, useInput } from 'ink';
+import Spinner from 'ink-spinner';
 import {
   GestureEntropy,
+  cast,
   type CastMethod,
   type QrngResult,
   type Reading as ReadingType,
 } from '@q-ching/core';
+import { c } from './theme.js';
+import { Frame, Heading } from './components/Layout.js';
+import type { Replay } from './cli.js';
 import { Splash } from './screens/Splash.js';
 import { Question } from './screens/Question.js';
 import { Method } from './screens/Method.js';
@@ -13,7 +18,7 @@ import { Gathering } from './screens/Gathering.js';
 import { Casting } from './screens/Casting.js';
 import { Reading } from './screens/Reading.js';
 
-type Stage = 'splash' | 'question' | 'method' | 'gathering' | 'casting' | 'reading';
+type Stage = 'splash' | 'replaying' | 'question' | 'method' | 'gathering' | 'casting' | 'reading';
 
 interface CastState {
   question: string;
@@ -32,13 +37,40 @@ const EMPTY: CastState = {
   reading: null,
 };
 
-export function App(): React.JSX.Element {
+export interface AppProps {
+  /** When set, skip the ritual and reproduce this exact reading from its seed. */
+  replay?: Replay;
+}
+
+export function App({ replay }: AppProps = {}): React.JSX.Element {
   const { exit } = useApp();
-  const [stage, setStage] = useState<Stage>('splash');
+  const [stage, setStage] = useState<Stage>(replay ? 'replaying' : 'splash');
   const [state, setState] = useState<CastState>(EMPTY);
 
   // A fresh gesture accumulator per reading; replaced on recast.
   const gestureRef = useRef(new GestureEntropy());
+
+  // Replay path: reproduce the cast from its seed and jump straight to the
+  // reading, skipping the gather/draw animation. The CLI has already validated
+  // the seed, but if the engine still rejects it we fall back to the ordinary
+  // ritual rather than hang on the spinner.
+  useEffect(() => {
+    if (stage !== 'replaying' || !replay) return;
+    let live = true;
+    void (async () => {
+      try {
+        const reading = await cast({ seed: replay.seed, method: replay.method });
+        if (!live) return;
+        setState((s) => ({ ...s, method: replay.method, reading }));
+        setStage('reading');
+      } catch {
+        if (live) setStage('splash');
+      }
+    })();
+    return () => {
+      live = false;
+    };
+  }, [stage, replay]);
 
   const recast = useCallback(() => {
     gestureRef.current = new GestureEntropy();
@@ -65,6 +97,19 @@ export function App(): React.JSX.Element {
   switch (stage) {
     case 'splash':
       return <Splash onDone={() => setStage('question')} />;
+
+    case 'replaying':
+      return (
+        <Frame>
+          <Heading>Replaying</Heading>
+          <Box flexDirection="row">
+            <Text color="#b34733">
+              <Spinner type="dots" />
+            </Text>
+            <Text>{c.ink('  reproducing the cast from its seed…')}</Text>
+          </Box>
+        </Frame>
+      );
 
     case 'question':
       return (

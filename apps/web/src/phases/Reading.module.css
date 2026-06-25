@@ -305,6 +305,40 @@
   color: var(--gold);
 }
 
+/* ---- share a link to this cast ------------------------------------------- */
+
+.share {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.linkButton {
+  font-family: var(--sans);
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding: 0.3rem 0.1rem;
+  background: none;
+  border: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.4s var(--ease-soft), color 0.4s var(--ease-soft);
+  cursor: pointer;
+}
+.linkButton:hover {
+  border-bottom-color: var(--gold-soft);
+}
+
+.shareHint {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--paper-faint);
+  max-width: 22rem;
+}
+
 .again {
   margin-top: 1rem;
 }

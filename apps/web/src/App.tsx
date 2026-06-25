@@ -1,6 +1,14 @@
 import { useCallback, useEffect, useReducer, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { GestureEntropy, cast, type QrngResult, type Reading } from '@q-ching/core';
+import {
+  GestureEntropy,
+  cast,
+  isValidSeed,
+  normalizeSeed,
+  type CastMethod,
+  type QrngResult,
+  type Reading,
+} from '@q-ching/core';
 
 import { initialRitualState, ritualReducer } from './ritual/machine';
 import { useReducedMotion } from './lib/hooks';
@@ -52,6 +60,41 @@ export default function App() {
   useEffect(() => {
     setEntries(loadJournal());
   }, []);
+
+  // Replay-from-link: opening the page with ?seed=…(&method=…) reproduces that
+  // exact cast and jumps straight to the reading. Like a journal revisit, we
+  // don't re-journal it — it may be someone else's shared cast. A malformed or
+  // missing seed simply falls through to the threshold.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const rawSeed = params.get('seed');
+    if (!rawSeed || !isValidSeed(rawSeed)) return;
+    const method: CastMethod = params.get('method') === 'yarrow' ? 'yarrow' : 'coin';
+    void (async () => {
+      try {
+        const reading = await cast({ seed: normalizeSeed(rawSeed), method });
+        dispatch({ type: 'setMethod', method });
+        dispatch({ type: 'castComplete', reading });
+      } catch {
+        /* unreproducible seed — leave the querent at the threshold */
+      }
+    })();
+  }, []);
+
+  // Keep the address bar in step with the reading on screen, so it is always a
+  // shareable link; strip the params when we leave the reading. replaceState
+  // keeps this out of the back-button history.
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    if (state.phase === 'reading' && state.reading) {
+      url.searchParams.set('seed', state.reading.seed);
+      url.searchParams.set('method', state.reading.method);
+    } else {
+      url.searchParams.delete('seed');
+      url.searchParams.delete('method');
+    }
+    window.history.replaceState(null, '', url);
+  }, [state.phase, state.reading]);
 
   const freshGesture = useCallback(() => {
     gestureRef.current = new GestureEntropy();

@@ -34,6 +34,34 @@ function yarrowLine(reader: BitReader): LineValue {
   return 8;                      // 7/16  (9..15)
 }
 
+/**
+ * The canonical length of a seed: a 32-byte SHA-256 PRK rendered as hex.
+ * `EntropyPool.fingerprint()` always returns a string of exactly this length.
+ */
+export const SEED_LENGTH = 64;
+
+const SEED_RE = new RegExp(`^(?:0x)?[0-9a-f]{${SEED_LENGTH}}$`, 'i');
+
+/**
+ * True if `s` is a well-formed cast seed — {@link SEED_LENGTH} hex characters
+ * (case-insensitive), optionally with a leading `0x` and surrounding
+ * whitespace. Both apps validate user-supplied seeds with this before handing
+ * them to `cast({ seed })`, so a malformed query param or CLI flag is caught
+ * rather than silently producing a garbage reading.
+ */
+export function isValidSeed(s: string): boolean {
+  return SEED_RE.test(s.trim());
+}
+
+/**
+ * Canonicalize a seed for storage, sharing, and display: trimmed, lowercased,
+ * any `0x` prefix removed. Pair with {@link isValidSeed}, which accepts the
+ * looser input forms this collapses.
+ */
+export function normalizeSeed(s: string): string {
+  return s.trim().replace(/^0x/i, '').toLowerCase();
+}
+
 export interface CastInput {
   /** 'coin' (default) or 'yarrow'. */
   method?: CastMethod;

@@ -35,7 +35,7 @@ powers three faces: a browser PWA, a phone, and a terminal.
 
 - **Two casting rituals** with correct probabilities — the **coin** method (⅛·⅜·⅜·⅛) and the traditional **yarrow stalk** method (1⁄16·5⁄16·7⁄16·3⁄16, where changing lines are rarer).
 - **Changing lines & transformation** — every reading shows the primary hexagram, the moving-line texts, and the hexagram it is *becoming*.
-- **Reproducible, shareable seeds** — each cast exposes the exact seed that produced it; `cast({ seed })` reproduces it perfectly. Readings are auditable and shareable.
+- **Reproducible, shareable seeds** — each cast exposes the exact seed that produced it, and `cast({ seed, method })` reproduces it perfectly. Replay a reading from a link (`…/?seed=<hex>&method=<coin|yarrow>`) or the terminal (`q-ching --seed <hex>`) — see [Replaying a reading](#-replaying-a-reading).
 - **The full text** — all 64 hexagrams with judgment, image, a one-line gloss, and six line texts. Original prose, faithful to the classic meaning (no copyrighted translation).
 - **Beautiful by intent** — an ink-wash aesthetic, slow eased animations, a luminous ink trail that follows your hand, and full `prefers-reduced-motion` support.
 - **Runs everywhere from one engine** — `@q-ching/core` is dependency-free and uses only Web Crypto + `fetch`.
@@ -63,6 +63,29 @@ Both apps share the same arc:
 3. **Gather** — trace the dark with your hand while the quantum sources answer, each resolving to ✓ / ✗.
 4. **Cast** — six lines form from the ground up; changing lines glow cinnabar.
 5. **Read** — the hexagram, its judgment and image, the moving lines, what it is becoming — and the seed that reproduces it.
+
+## 🔁 Replaying a reading
+
+A reading is fully reproducible from its **seed** — the 64-character fingerprint shown beneath every cast — together with the **method** it was drawn by. The same seed draws different lines under coin vs. yarrow, so the two always travel together.
+
+- **Web** — every reading puts its seed in the address bar as a shareable link, and a **copy a link to this cast** button is offered beside the seed:
+
+  ```
+  https://your-host/?seed=<hex>&method=<coin|yarrow>
+  ```
+
+  Open that link and the oracle reproduces the exact throw, skipping the gather animation.
+
+- **Terminal** — pass the seed back to the CLI. Every reading prints the exact command for you:
+
+  ```bash
+  q-ching --seed <hex> [--method yarrow]   # --method defaults to coin
+  q-ching --help                           # full usage
+  ```
+
+- **Engine** — `cast({ seed, method })` returns the identical reading anywhere `@q-ching/core` runs.
+
+The question you asked is *not* part of the seed and is never placed in a shared link — only the cast itself travels.
 
 ## 🧭 The surfaces
 

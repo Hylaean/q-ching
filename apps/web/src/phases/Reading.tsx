@@ -43,11 +43,14 @@ export function Reading({ reading, question, reducedMotion, onAgain }: ReadingPr
     : undefined;
   const nowLines = (fr ? NOW_LINES_FR[primary.number] : undefined) ?? NOW_LINES[primary.number];
   const [copied, setCopied] = useState(false);
+  const [linkCopied, setLinkCopied] = useState(false);
   const copyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const linkTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(
     () => () => {
       if (copyTimer.current) clearTimeout(copyTimer.current);
+      if (linkTimer.current) clearTimeout(linkTimer.current);
     },
     [],
   );
@@ -60,6 +63,21 @@ export function Reading({ reading, question, reducedMotion, onAgain }: ReadingPr
       copyTimer.current = setTimeout(() => setCopied(false), 2200);
     } catch {
       /* clipboard may be unavailable; the seed is still visible to select */
+    }
+  };
+
+  // A self-contained link that reopens this exact cast (App reads ?seed=&method=
+  // on load). Built from the live location so it works on any host or path.
+  const shareUrl = `${window.location.origin}${window.location.pathname}?seed=${seed}&method=${method}`;
+
+  const copyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setLinkCopied(true);
+      if (linkTimer.current) clearTimeout(linkTimer.current);
+      linkTimer.current = setTimeout(() => setLinkCopied(false), 2200);
+    } catch {
+      /* clipboard may be unavailable; the address bar already holds the link */
     }
   };
 
@@ -183,6 +201,12 @@ export function Reading({ reading, question, reducedMotion, onAgain }: ReadingPr
             <span className={styles.seedValue}>{seed}</span>
             <span className={styles.copyTag}>{copied ? t('reading.copied') : t('reading.copy')}</span>
           </button>
+          <div className={styles.share}>
+            <button className={styles.linkButton} onClick={copyLink}>
+              {linkCopied ? t('reading.linkCopied') : t('reading.copyLink')}
+            </button>
+            <p className={styles.shareHint}>{t('reading.shareHint')}</p>
+          </div>
         </motion.section>
 
         {/* ---- Cast again --------------------------------------------------- */}

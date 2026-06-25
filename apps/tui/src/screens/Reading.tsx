@@ -61,6 +61,12 @@ export function Reading({ reading, question }: ReadingProps): React.JSX.Element 
   const { primary, transformed, changingPositions } = reading;
   const proseWidth = Math.min(termWidth() - 4, 72);
 
+  // The exact command that reproduces this cast. The method must travel with
+  // the seed (the same seed draws different lines under coin vs. yarrow).
+  const replayCmd =
+    `q-ching --seed ${reading.seed}` +
+    (reading.method === 'yarrow' ? ' --method yarrow' : '');
+
   return (
     <Frame>
       {question ? (
@@ -134,11 +140,17 @@ export function Reading({ reading, question }: ReadingProps): React.JSX.Element 
         <Divider />
         <Box marginTop={1}>
           <Text>
-            {c.dim('seed ')}
+            {c.dim('seed    ')}
             {c.dim(reading.seed)}
           </Text>
         </Box>
-        <Text>{c.dim('this seed reproduces the cast exactly — share it or keep it')}</Text>
+        <Box>
+          <Text>
+            {c.dim('replay  ')}
+            {c.ink(replayCmd)}
+          </Text>
+        </Box>
+        <Text>{c.dim('run that to relive this exact cast — share it or keep it')}</Text>
       </Box>
 
       <Box marginTop={1}>

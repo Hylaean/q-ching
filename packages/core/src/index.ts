@@ -28,6 +28,14 @@ export {
   type QrngConfig,
 } from './entropy/qrng.js';
 
-export { cast, coinLine, yarrowLine, type CastInput } from './casting.js';
+export {
+  cast,
+  coinLine,
+  yarrowLine,
+  isValidSeed,
+  normalizeSeed,
+  SEED_LENGTH,
+  type CastInput,
+} from './casting.js';
 
 export { toHex, fromHex } from './util.js';

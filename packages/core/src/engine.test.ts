@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { cast } from './casting.js';
+import { cast, isValidSeed, normalizeSeed, SEED_LENGTH } from './casting.js';
 import { EntropyPool } from './entropy/pool.js';
 import { HEXAGRAMS, hexagramByBits, hexagramByNumber, validateHexagrams } from './hexagrams.js';
 import { BitReader } from './util.js';
@@ -35,6 +35,32 @@ test('a seed reproduces an identical reading', async () => {
   assert.equal(a.primary.number, b.primary.number);
   assert.equal(a.transformed?.number ?? null, b.transformed?.number ?? null);
   assert.deepEqual(a.lines.map((l) => l.value), b.lines.map((l) => l.value));
+});
+
+test('a real seed round-trips and the method must travel with it', async () => {
+  const a = await cast({ method: 'yarrow', userEntropy: [9, 8, 7], now: () => 1000 });
+  assert.ok(isValidSeed(a.seed));
+  assert.equal(a.seed.length, SEED_LENGTH);
+
+  // Same seed + same method reproduces the cast exactly.
+  const same = await cast({ seed: a.seed, method: 'yarrow', now: () => 2000 });
+  assert.deepEqual(same.lines.map((l) => l.value), a.lines.map((l) => l.value));
+
+  // Same seed, *wrong* method draws different lines — which is why a shareable
+  // replay token has to carry the method, not just the seed.
+  const wrong = await cast({ seed: a.seed, method: 'coin', now: () => 2000 });
+  assert.notDeepEqual(wrong.lines.map((l) => l.value), a.lines.map((l) => l.value));
+});
+
+test('isValidSeed / normalizeSeed accept and canonicalize the shareable forms', () => {
+  const seed = 'a'.repeat(SEED_LENGTH);
+  assert.ok(isValidSeed(seed));
+  assert.ok(isValidSeed(`  0X${seed.toUpperCase()}  `)); // padded, 0x, uppercase
+  assert.ok(!isValidSeed(seed.slice(1))); // too short
+  assert.ok(!isValidSeed(seed + 'a')); // too long
+  assert.ok(!isValidSeed('z'.repeat(SEED_LENGTH))); // non-hex
+
+  assert.equal(normalizeSeed(`  0x${seed.toUpperCase()}  `), seed);
 });
 
 test('coin distribution ~ 1/8, 3/8, 3/8, 1/8', async () => {
