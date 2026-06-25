@@ -32,11 +32,10 @@ jobs:
           node-version: 20
           cache: npm
 
-      # A lockfile generated on a different OS omits rollup's Linux native binary from
-      # its package tree (npm/cli#4828), which breaks both `npm ci` and `npm install`
-      # ("Cannot find module @rollup/rollup-linux-x64-gnu"). Dropping the lockfile lets
-      # npm resolve the correct platform binaries fresh on the runner.
-      - run: rm -f package-lock.json && npm install
+      # The runner's rollup native binary (@rollup/rollup-linux-x64-gnu) is pinned as an
+      # optionalDependency in package.json so it's recorded in the lockfile and `npm ci`
+      # installs it here, despite npm's cross-OS optional-deps bug (npm/cli#4828).
+      - run: npm ci
 
       # Build the engine first — apps/web resolves @q-ching/core from its dist/.
       - run: npm run build:core
