@@ -5,7 +5,7 @@ import {
   type GestureEntropy,
   type QrngResult,
   type QrngSourceName,
-} from '@q-ching/core';
+} from '@hylaean/core';
 import { InkCanvas } from '../components/InkCanvas';
 import { EntropyMeter } from '../components/EntropyMeter';
 import { SourceList, type SourceStatus } from '../components/SourceList';

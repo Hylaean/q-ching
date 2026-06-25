@@ -1,8 +1,27 @@
 {
-  "name": "@q-ching/core",
+  "name": "@hylaean/core",
   "version": "0.1.0",
   "description": "Platform-agnostic I-Ching engine: entropy pool, QRNG clients, casting math, and the 64 hexagrams.",
   "type": "module",
+  "license": "MIT",
+  "author": "Jean Llorca <jean@hylaean.com>",
+  "homepage": "https://github.com/Hylaean/q-ching#readme",
+  "bugs": "https://github.com/Hylaean/q-ching/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hylaean/q-ching.git",
+    "directory": "packages/core"
+  },
+  "keywords": [
+    "i-ching",
+    "iching",
+    "oracle",
+    "hexagram",
+    "qrng",
+    "quantum",
+    "entropy",
+    "divination"
+  ],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -13,10 +32,17 @@
     }
   },
   "files": ["dist", "src"],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "dev": "tsc -p tsconfig.json --watch",
-    "test": "tsc -p tsconfig.test.json && node --test dist/*.test.js"
+    "test": "tsc -p tsconfig.test.json && node --test dist/*.test.js",
+    "prepublishOnly": "npm run build"
   },
   "sideEffects": false
 }

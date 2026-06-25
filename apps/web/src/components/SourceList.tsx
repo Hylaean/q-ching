@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import type { QrngResult, QrngSourceName } from '@q-ching/core';
+import type { QrngResult, QrngSourceName } from '@hylaean/core';
 import { useI18n } from '../i18n';
 import styles from './SourceList.module.css';
 

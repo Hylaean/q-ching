@@ -5,7 +5,7 @@ import {
   type CastMethod,
   type QrngResult,
   type Reading as ReadingType,
-} from '@q-ching/core';
+} from '@hylaean/core';
 import { Splash } from './screens/Splash.js';
 import { Question } from './screens/Question.js';
 import { Method } from './screens/Method.js';

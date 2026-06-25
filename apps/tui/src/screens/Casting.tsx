@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Box, Text } from 'ink';
 import Spinner from 'ink-spinner';
-import { cast, type CastMethod, type QrngResult, type Reading } from '@q-ching/core';
+import { cast, type CastMethod, type QrngResult, type Reading } from '@hylaean/core';
 import { c } from '../theme.js';
 import { Frame, Heading } from '../components/Layout.js';
 import { HexLines } from '../components/HexLines.js';

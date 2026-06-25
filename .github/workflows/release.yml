@@ -1,0 +1,53 @@
+name: Release
+
+# On every push to main, Changesets does one of two things:
+#   - If there are pending changeset files, it opens/updates a "Version Packages"
+#     PR that bumps versions and updates changelogs. Merging that PR triggers...
+#   - ...a publish: any public package whose version isn't yet on the registry is
+#     published to npm (in dependency order: core → tui/mcp).
+# The very first run, with no changesets pending, publishes the initial 0.1.0.
+#
+# Auth: NODE_AUTH_TOKEN comes from the NPM_TOKEN repo secret (an npm Automation
+# token, so it bypasses 2FA). setup-node's registry-url writes the ~/.npmrc that
+# consumes it. GITHUB_TOKEN is the built-in token used to open the PR / push tags.
+
+on:
+  push:
+    branches: [main]
+
+# One release at a time.
+concurrency: release-${{ github.ref }}
+
+permissions:
+  contents: write # push the version commit + git tags
+  pull-requests: write # open/update the "Version Packages" PR
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Changesets diffs against baseBranch, so it needs full history
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          registry-url: 'https://registry.npmjs.org'
+
+      # The rollup native binary is pinned as an optionalDependency so npm ci
+      # installs it here despite npm's cross-OS optional-deps bug (npm/cli#4828).
+      - run: npm ci
+
+      # Build the engine first — tui and mcp resolve @hylaean/core from its dist/.
+      - run: npm run build:core
+
+      - name: Create Release PR or publish to npm
+        uses: changesets/action@v1
+        with:
+          version: npm run version-packages
+          publish: npm run release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

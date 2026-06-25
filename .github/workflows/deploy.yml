@@ -37,7 +37,7 @@ jobs:
       # installs it here, despite npm's cross-OS optional-deps bug (npm/cli#4828).
       - run: npm ci
 
-      # Build the engine first — apps/web resolves @q-ching/core from its dist/.
+      # Build the engine first — apps/web resolves @hylaean/core from its dist/.
       - run: npm run build:core
       - run: npm run build:web
 

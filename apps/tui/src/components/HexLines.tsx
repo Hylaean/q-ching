@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Text } from 'ink';
-import type { Line } from '@q-ching/core';
+import type { Line } from '@hylaean/core';
 import { c } from '../theme.js';
 
 const BAR = 11; // total bar width in cells

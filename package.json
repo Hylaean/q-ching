@@ -10,20 +10,26 @@
     "experiments/*"
   ],
   "scripts": {
-    "build:core": "npm run build --workspace @q-ching/core",
-    "test:core": "npm run test --workspace @q-ching/core",
-    "dev:web": "npm run dev --workspace @q-ching/web",
-    "build:web": "npm run build --workspace @q-ching/web",
-    "tui": "npm run start --workspace @q-ching/tui",
-    "mcp": "npm run start --workspace @q-ching/mcp",
-    "build:mcp": "npm run build --workspace @q-ching/mcp",
-    "experiment": "npm run start --workspace @q-ching/exp-oracle-guided",
-    "build": "npm run build:core && npm run build:web && npm run build --workspace @q-ching/tui && npm run build:mcp"
+    "build:core": "npm run build --workspace @hylaean/core",
+    "test:core": "npm run test --workspace @hylaean/core",
+    "dev:web": "npm run dev --workspace @hylaean/web",
+    "build:web": "npm run build --workspace @hylaean/web",
+    "tui": "npm run start --workspace @hylaean/tui",
+    "mcp": "npm run start --workspace @hylaean/mcp",
+    "build:mcp": "npm run build --workspace @hylaean/mcp",
+    "experiment": "npm run start --workspace @hylaean/exp-oracle-guided",
+    "build": "npm run build:core && npm run build:web && npm run build --workspace @hylaean/tui && npm run build:mcp",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "changeset publish"
   },
   "engines": {
     "node": ">=20"
   },
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "4.62.2"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.31.0"
   }
 }

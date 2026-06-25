@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Text } from 'ink';
-import type { Hexagram, Reading as ReadingType } from '@q-ching/core';
+import type { Hexagram, Reading as ReadingType } from '@hylaean/core';
 import { c } from '../theme.js';
 import { Divider, Frame, Hints, Prose } from '../components/Layout.js';
 import { HexLines } from '../components/HexLines.js';

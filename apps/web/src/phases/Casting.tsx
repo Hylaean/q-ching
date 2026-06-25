@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { cast, type CastMethod, type QrngResult, type Reading } from '@q-ching/core';
+import { cast, type CastMethod, type QrngResult, type Reading } from '@hylaean/core';
 import { LineStack, type LineDatum } from '../components/LineStack';
 import { useI18n } from '../i18n';
 import styles from './Casting.module.css';

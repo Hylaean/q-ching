@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, type MotionProps } from 'framer-motion';
-import type { Reading as ReadingType } from '@q-ching/core';
+import type { Reading as ReadingType } from '@hylaean/core';
 import { HexagramGlyph } from '../components/HexagramGlyph';
 import { LineStack, bitsToLines } from '../components/LineStack';
 import { useI18n } from '../i18n';

@@ -4,14 +4,14 @@
  *
  * Exposes the q-ching I-Ching oracle as a Model Context Protocol tool over
  * stdio, so any MCP client (Claude Desktop, Claude Code, other agents) can cast
- * a reading. Runs the dependency-free @q-ching/core engine directly — and,
+ * a reading. Runs the dependency-free @hylaean/core engine directly — and,
  * being a Node process with no browser CORS, it reaches the live quantum
  * sources the same way the terminal app does.
  */
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { z } from 'zod';
-import { cast } from '@q-ching/core';
+import { cast } from '@hylaean/core';
 import { formatReading } from './format.js';
 
 const server = new McpServer({ name: 'q-ching', version: '0.1.0' });

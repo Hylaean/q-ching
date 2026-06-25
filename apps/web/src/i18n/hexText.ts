@@ -1,4 +1,4 @@
-import type { Hexagram } from '@q-ching/core';
+import type { Hexagram } from '@hylaean/core';
 import type { Locale } from './strings';
 import { HEXAGRAMS_FR } from './hexagrams.fr';
 

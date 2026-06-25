@@ -13,7 +13,7 @@ import { writeFile, mkdir } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import Anthropic from '@anthropic-ai/sdk';
-import { cast } from '@q-ching/core';
+import { cast } from '@hylaean/core';
 import { formatReading } from './format.js';
 import { DEFAULT_QUESTIONS } from './questions.js';
 

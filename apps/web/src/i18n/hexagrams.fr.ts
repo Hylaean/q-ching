@@ -1,6 +1,6 @@
 /**
  * French interpretive text for the 64 hexagrams, keyed by King Wen number.
- * AUTO-GENERATED — translated from the canonical English in @q-ching/core.
+ * AUTO-GENERATED — translated from the canonical English in @hylaean/core.
  * hexText() falls back to English per-hexagram when an entry is missing.
  */
 

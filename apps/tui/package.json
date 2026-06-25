@@ -1,19 +1,45 @@
 {
-  "name": "@q-ching/tui",
+  "name": "@hylaean/tui",
   "version": "0.1.0",
   "description": "q-ching in your terminal: an I-Ching oracle cast from live quantum entropy and the rhythm of your own typing.",
   "type": "module",
+  "license": "MIT",
+  "author": "Jean Llorca <jean@hylaean.com>",
+  "homepage": "https://github.com/Hylaean/q-ching#readme",
+  "bugs": "https://github.com/Hylaean/q-ching/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hylaean/q-ching.git",
+    "directory": "apps/tui"
+  },
+  "keywords": [
+    "i-ching",
+    "iching",
+    "oracle",
+    "hexagram",
+    "cli",
+    "tui",
+    "ink",
+    "divination"
+  ],
   "bin": {
     "q-ching": "./dist/index.js"
   },
   "files": ["dist", "src"],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "start": "tsx src/index.tsx",
     "dev": "tsx watch src/index.tsx",
-    "build": "tsc"
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@q-ching/core": "*",
+    "@hylaean/core": "^0.1.0",
     "chalk": "^5.3.0",
     "ink": "^5.0.1",
     "ink-big-text": "^2.0.0",

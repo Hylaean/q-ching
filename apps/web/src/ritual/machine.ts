@@ -3,7 +3,7 @@
  * forward; the only backward move is "cast again", which returns to QUESTION
  * so the gesture/entropy is re-gathered fresh for the next reading.
  */
-import type { CastMethod, QrngSourceName, Reading } from '@q-ching/core';
+import type { CastMethod, QrngSourceName, Reading } from '@hylaean/core';
 
 export type Phase = 'threshold' | 'question' | 'gathering' | 'casting' | 'reading';
 

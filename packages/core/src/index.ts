@@ -1,5 +1,5 @@
 /**
- * @q-ching/core — a platform-agnostic I-Ching engine.
+ * @hylaean/core — a platform-agnostic I-Ching engine.
  *
  * Runs identically in the browser, in Node, and in a terminal: it relies only
  * on Web Crypto and fetch, both standard in modern browsers and Node >=20.

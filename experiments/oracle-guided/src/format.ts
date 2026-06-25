@@ -1,4 +1,4 @@
-import type { Reading } from '@q-ching/core';
+import type { Reading } from '@hylaean/core';
 
 /** Render a Reading as readable text for the LLM's tool result. */
 export function formatReading(reading: Reading, question?: string): string {

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import type { Bit } from '@q-ching/core';
+import type { Bit } from '@hylaean/core';
 import styles from './LineStack.module.css';
 
 export interface LineDatum {

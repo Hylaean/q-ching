@@ -1,5 +1,5 @@
 {
-  "name": "@q-ching/exp-oracle-guided",
+  "name": "@hylaean/exp-oracle-guided",
   "version": "0.1.0",
   "private": true,
   "description": "An A/B experiment: does consulting the q-ching oracle change how an LLM advises? Guided arm vs. control arm.",
@@ -9,7 +9,7 @@
     "build": "tsc --noEmit"
   },
   "dependencies": {
-    "@q-ching/core": "*",
+    "@hylaean/core": "*",
     "@anthropic-ai/sdk": "*"
   },
   "devDependencies": {

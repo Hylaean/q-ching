@@ -1,21 +1,47 @@
 {
-  "name": "@q-ching/mcp",
+  "name": "@hylaean/mcp",
   "version": "0.1.0",
   "description": "An MCP server that lets any AI assistant consult the q-ching I-Ching oracle as a tool.",
   "type": "module",
+  "license": "MIT",
+  "author": "Jean Llorca <jean@hylaean.com>",
+  "homepage": "https://github.com/Hylaean/q-ching#readme",
+  "bugs": "https://github.com/Hylaean/q-ching/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hylaean/q-ching.git",
+    "directory": "apps/mcp"
+  },
+  "keywords": [
+    "i-ching",
+    "iching",
+    "oracle",
+    "hexagram",
+    "mcp",
+    "model-context-protocol",
+    "ai",
+    "divination"
+  ],
   "bin": {
     "q-ching-mcp": "./dist/index.js"
   },
   "files": ["dist", "src"],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "start": "tsx src/index.ts",
     "dev": "tsx watch src/index.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@q-ching/core": "*",
-    "@modelcontextprotocol/sdk": "*",
-    "zod": "*"
+    "@hylaean/core": "^0.1.0",
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/node": "^20.14.0",
