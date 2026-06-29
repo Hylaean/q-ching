@@ -33,6 +33,20 @@ export function Reading({ reading, question, reducedMotion, onAgain }: ReadingPr
           transition: { duration: 1.1, ease: [0.22, 1, 0.36, 1], delay },
         };
 
+  // Same look as section(), but revealed on mount rather than on scroll. The
+  // terminal "Cast again" affordance sits below everything else with only a
+  // little padding beneath it, so the scroll-reveal's -12% bottom viewport
+  // margin leaves it in a dead-zone it can never scroll into — it would stay at
+  // opacity 0 forever. Fading it in on mount keeps it reliably reachable.
+  const mountReveal = (delay: number): MotionProps =>
+    reducedMotion
+      ? { initial: false, animate: { opacity: 1, y: 0 } }
+      : {
+          initial: { opacity: 0, y: 22 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 1.1, ease: [0.22, 1, 0.36, 1], delay },
+        };
+
   const { primary, transformed, changingPositions, lines, seed, method } = reading;
   const primaryText = hexText(primary, locale);
   const transformedText = transformed ? hexText(transformed, locale) : null;
@@ -210,7 +224,7 @@ export function Reading({ reading, question, reducedMotion, onAgain }: ReadingPr
         </motion.section>
 
         {/* ---- Cast again --------------------------------------------------- */}
-        <motion.div className={styles.again} {...section(0.05)}>
+        <motion.div className={styles.again} {...mountReveal(0.05)}>
           <button className="affordance affordance--primary" onClick={onAgain}>
             {t('reading.castAgain')}
           </button>
