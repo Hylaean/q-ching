@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@q-ching/core": "*",
-    "framer-motion": "^12.42.0",
+    "framer-motion": "^12.42.2",
     "react": "^19.2.7",
     "react-dom": "^19.2.7"
   },
@@ -20,6 +20,6 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^6.0.3",
     "typescript": "^6.0.3",
-    "vite": "^8.1.0"
+    "vite": "^8.1.3"
   }
 }

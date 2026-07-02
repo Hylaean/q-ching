@@ -9,8 +9,8 @@
     "build": "tsc --noEmit"
   },
   "dependencies": {
-    "@q-ching/core": "*",
-    "@anthropic-ai/sdk": "*"
+    "@anthropic-ai/sdk": "^0.109.1",
+    "@q-ching/core": "*"
   },
   "devDependencies": {
     "@types/node": "^20.14.0",
