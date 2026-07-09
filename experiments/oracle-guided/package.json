@@ -9,12 +9,12 @@
     "build": "tsc --noEmit"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.109.1",
+    "@anthropic-ai/sdk": "^0.110.0",
     "@q-ching/core": "*"
   },
   "devDependencies": {
-    "@types/node": "^26.1.0",
-    "tsx": "^4.16.0",
+    "@types/node": "^26.1.1",
+    "tsx": "^4.23.0",
     "typescript": "^6.0.3"
   }
 }
