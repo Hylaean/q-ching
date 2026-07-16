@@ -39,7 +39,7 @@ jobs:
         with:
           fetch-depth: 0 # Changesets diffs against baseBranch, so it needs full history
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: 20
           cache: npm
