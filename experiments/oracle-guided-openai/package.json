@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@q-ching/core": "*",
-    "openai": "^6.48.0"
+    "openai": "^7.1.0"
   },
   "devDependencies": {
     "@types/node": "^26.1.2",
