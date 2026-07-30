@@ -46,6 +46,6 @@
   },
   "sideEffects": false,
   "devDependencies": {
-    "@types/node": "^26.1.1"
+    "@types/node": "^26.1.2"
   }
 }
