@@ -41,11 +41,11 @@
   "dependencies": {
     "@q-ching/core": "^0.1.0",
     "@modelcontextprotocol/sdk": "^1.30.0",
-    "zod": "^4.4.3"
+    "zod": "^4.5.4"
   },
   "devDependencies": {
-    "@types/node": "^26.2.0",
-    "tsx": "^4.23.12",
+    "@types/node": "^26.4.0",
+    "tsx": "^4.23.13",
     "typescript": "^7.0.2"
   }
 }
