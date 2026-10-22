@@ -11,9 +11,9 @@
   },
   "dependencies": {
     "@q-ching/core": "*",
-    "framer-motion": "^14.1.0",
-    "react": "^19.3.0",
-    "react-dom": "^19.3.0"
+    "framer-motion": "^14.4.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
   },
   "devDependencies": {
     "@types/react": "^19.3.0",

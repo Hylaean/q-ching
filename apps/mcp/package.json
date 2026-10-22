@@ -41,7 +41,7 @@
   "dependencies": {
     "@q-ching/core": "^0.1.0",
     "@modelcontextprotocol/sdk": "^1.32.1",
-    "zod": "^4.6.6"
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@types/node": "^26.6.5",
