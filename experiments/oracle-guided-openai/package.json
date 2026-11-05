@@ -10,10 +10,10 @@
   },
   "dependencies": {
     "@q-ching/core": "*",
-    "openai": "^7.43.0"
+    "openai": "^7.47.0"
   },
   "devDependencies": {
-    "@types/node": "^26.6.5",
+    "@types/node": "^26.6.6",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2"
   }
